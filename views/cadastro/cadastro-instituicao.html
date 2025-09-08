@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated title for institution registration -->
+    <title>Cadastro de Instituição - INTEGRA</title>
+    <link rel="icon" href="../img/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Nova paleta de cores vibrante com roxo açaí, amarelo e gradientes */
+            --background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            --foreground: #1e293b;
+            --primary: linear-gradient(135deg, #4B0082 0%, #663399 50%, #8B5CF6 100%);
+            --primary-foreground: #ffffff;
+            --secondary: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            --accent: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            --border: #e2e8f0;
+            --muted: #f1f5f9;
+            --muted-foreground: #64748b;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --shadow: rgba(75, 0, 130, 0.1);
+        }
+
+        .dark {
+            --background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            --foreground: #f8fafc;
+            --primary: linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #C084FC 100%);
+            --primary-foreground: #0f172a;
+            --secondary: linear-gradient(135deg, #FCD34D 0%, #F59E0B 100%);
+            --accent: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%);
+            --border: #334155;
+            --muted: #1e293b;
+            --muted-foreground: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.9);
+            --shadow: rgba(139, 92, 246, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--foreground);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            animation: fadeIn 0.8s ease-out;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Adding animated gears background */
+        .gears-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .gear {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatUp linear infinite;
+        }
+
+        .gear svg {
+            fill: #582b69;
+            animation: gearRotate 10s linear infinite;
+        }
+
+        /* Different gear animations with varying speeds and positions */
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-200px) rotate(360deg);
+            }
+        }
+
+        .gear:nth-child(1) {
+            left: 10%;
+            animation-duration: 20s;
+            animation-delay: 0s;
+        }
+
+        .gear:nth-child(2) {
+            left: 25%;
+            animation-duration: 25s;
+            animation-delay: -5s;
+        }
+
+        .gear:nth-child(3) {
+            left: 40%;
+            animation-duration: 30s;
+            animation-delay: -10s;
+        }
+
+        .gear:nth-child(4) {
+            left: 60%;
+            animation-duration: 22s;
+            animation-delay: -15s;
+        }
+
+        .gear:nth-child(5) {
+            left: 75%;
+            animation-duration: 28s;
+            animation-delay: -8s;
+        }
+
+        .gear:nth-child(6) {
+            left: 90%;
+            animation-duration: 35s;
+            animation-delay: -20s;
+        }
+
+        .gear:nth-child(7) {
+            left: 5%;
+            animation-duration: 18s;
+            animation-delay: -12s;
+        }
+
+        .gear:nth-child(8) {
+            left: 85%;
+            animation-duration: 26s;
+            animation-delay: -3s;
+        }
+
+        /* Adding loading screen styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+
+        .loading-screen.active {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+            animation: fadeInScale 0.5s ease-out;
+        }
+
+        /* Updated to three gears with bounce animation */
+        .loading-gears {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 2rem;
+            height: 120px;
+        }
+
+        .loading-gear {
+            animation: spin 2s linear infinite;
+            position: relative;
+        }
+
+        .loading-gear.bounce {
+            animation: gearBounce 1.5s ease-in-out infinite;
+        }
+
+        .loading-gear.purple svg {
+            fill: #582b69;
+            width: 70px;
+            height: 70px;
+        }
+
+        .loading-gear.yellow svg {
+            fill: #FCD34D;
+            width: 70px;
+            height: 70px;
+        }
+
+        /* Added bounce animation for vertical movement */
+        @keyframes gearBounce {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            25% {
+                transform: translateY(-20px) rotate(90deg);
+            }
+
+            50% {
+                transform: translateY(-40px) rotate(180deg);
+            }
+
+            75% {
+                transform: translateY(-20px) rotate(270deg);
+            }
+        }
+
+        /* Different delays for wave effect */
+        .loading-gear:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loading-gear:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .loading-gear:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        /* Animação de entrada da página */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-page {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            /* Added min-height to ensure full viewport centering */
+            min-height: 100vh;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            animation: slideUp 0.6s ease-out 0.2s both;
+            /* Added margin auto for perfect horizontal centering */
+            margin: 0 auto;
+        }
+
+        /* Animação de deslizar para cima */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--muted-foreground);
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .back-link:hover {
+            color: var(--foreground);
+            background: var(--muted);
+            transform: translateX(-5px);
+        }
+
+        .login-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 25px -5px var(--shadow), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px -12px var(--shadow);
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.6s ease-out 0.4s both;
+        }
+
+        /* Animação de entrada do topo */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            animation: shimmer 2s ease-in-out infinite alternate;
+        }
+
+        /* Efeito shimmer no título */
+        @keyframes shimmer {
+            0% {
+                filter: brightness(1);
+            }
+
+            100% {
+                filter: brightness(1.2);
+            }
+        }
+
+        .card-description {
+            color: var(--muted-foreground);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Adding form styles with the same visual treatment as the original buttons */
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: fadeInUp 0.6s ease-out 0.6s both;
+            /* Added centering properties for form fields */
+            align-items: center;
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            /* Added full width and centering for form groups */
+            width: 100%;
+            align-items: stretch;
+        }
+
+        /* Added styles for side-by-side layout of institution type and code */
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .form-row .form-group {
+            margin: 0;
+        }
+
+        .form-row .form-group:first-child {
+            flex: 2;
+            /* Institution type takes more space */
+        }
+
+        .form-row .form-group:last-child {
+            flex: 1;
+            /* Institution code takes less space */
+        }
+
+        @media (max-width: 640px) {
+            .form-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .form-row .form-group:first-child,
+            .form-row .form-group:last-child {
+                flex: 1;
+            }
+        }
+
+        /* Adding input wrapper with icon styles */
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            z-index: 2;
+            color: var(--muted-foreground);
+            transition: color 0.3s ease;
+            pointer-events: none;
+        }
+
+        .input-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 1rem 1.5rem 1rem 3.5rem;
+            /* Added left padding for icon */
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: var(--card-bg);
+            color: var(--foreground);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            /* Added width and centering for inputs */
+            width: 100%;
+            text-align: center;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Icon color change on focus */
+        .form-group input:focus+.input-icon,
+        .form-group select:focus+.input-icon {
+            color: rgba(139, 92, 246, 0.8);
+        }
+
+        .form-group input::placeholder,
+        .form-group select::placeholder {
+            color: var(--muted-foreground);
+        }
+
+        .conditional-field {
+            margin-top: 0.5rem;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .conditional-field.show {
+            opacity: 1;
+            max-height: 100px;
+        }
+
+        .conditional-field input {
+            animation: slideInFromTop 0.3s ease-out;
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .input-help {
+            font-size: 0.8rem;
+            color: var(--muted-foreground);
+            margin-top: 0.25rem;
+            /* Changed help text alignment from center to left */
+            text-align: left;
+        }
+
+        .primary-button {
+            padding: 1.2rem 2rem;
+            background: var(--primary);
+            color: var(--primary-foreground);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            /* Added width and centering for button */
+            width: 100%;
+            max-width: 300px;
+            margin: 1rem auto 0;
+        }
+
+        .primary-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .primary-button:hover::before {
+            left: 100%;
+        }
+
+        .primary-button:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 25px -5px var(--shadow), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .primary-button:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .card-footer {
+            margin-top: 2rem;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out 0.8s both;
+        }
+
+        .recovery-link {
+            color: var(--muted-foreground);
+            font-size: 0.9rem;
+        }
+
+        .text-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .text-link:hover {
+            text-decoration: underline;
+            filter: brightness(1.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 640px) {
+            .login-container {
+                max-width: 100%;
+                padding: 0 1rem;
+            }
+
+            .login-card {
+                padding: 2rem;
+            }
+
+            .card-title {
+                font-size: 1.75rem;
+            }
+
+            /* Updated responsive styles for three gears */
+            .loading-gears {
+                gap: 1rem;
+                height: 100px;
+            }
+
+            .loading-gear.purple svg,
+            .loading-gear.yellow svg {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Adding loading screen overlay -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <!-- Updated to three gears: purple, yellow, purple -->
+            <div class="loading-gears">
+                <div class="loading-gear purple bounce">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+                    </svg>
+                </div>
+                <div class="loading-gear yellow bounce">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+                    </svg>
+                </div>
+                <div class="loading-gear purple bounce">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+                    </svg>
+                </div>
+            </div>
+            <!-- Updated loading text for institution registration -->
+            <h2 class="loading-text">Cadastrando Instituição...</h2>
+            <p class="loading-subtitle">Aguarde enquanto processamos o cadastro da sua instituição</p>
+        </div>
+    </div>
+
+    <!-- Adding animated gears background -->
+    <div class="gears-background">
+        <div class="gear">
+            <svg width="60" height="60" viewBox="0 0 24 24">
+                <path
+                    d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+            </svg>
+        </div>
+        <div class="gear">
+            <svg width="80" height="80" viewBox="0 0 24 24">
+                <path
+                    d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+            </svg>
+        </div>
+        <div class="gear">
+            <svg width="50" height="50" viewBox="0 0 24 24">
+                <path
+                    d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+            </svg>
+        </div>
+        <div class="gear">
+            <svg width="70" height="70" viewBox="0 0 24 24">
+                <path
+                    d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+            </svg>
+        </div>
+        <div class="gear">
+            <svg width="90" height="90" viewBox="0 0 24 24">
+                <path
+                    d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+            </svg>
+        </div>
+        <div class="gear">
+            <svg width="45" height="45" viewBox="0 0 24 24">
+                <path
+                    d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+            </svg>
+        </div>
+        <div class="gear">
+            <svg width="65" height="65" viewBox="0 0 24 24">
+                <path
+                    d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="login-page">
+        <div class="login-container">
+            <a href="#" class="back-link" onclick="history.back(); return false;">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+
+            <div class="login-card">
+                <div class="card-header">
+                    <!-- Updated title and description for institution registration -->
+                    <h1 class="card-title">Cadastro de Instituição</h1>
+                    <p class="card-description">Preencha os dados da sua instituição de ensino</p>
+                </div>
+                <div class="card-content">
+                    <!-- Updated form ID and fields for institution registration -->
+                    <form id="instituicao-form" class="login-form">
+                        <div class="form-group">
+                            <label for="nome-instituicao">Nome da Instituição</label>
+                            <div class="input-wrapper">
+                                <input id="nome-instituicao" type="text"
+                                    placeholder="Digite o nome completo da instituição" required minlength="3">
+                                <div class="input-icon">
+                                    <!-- Updated icon to school for institution -->
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="input-help">Nome oficial da instituição de ensino</p>
+                        </div>
+
+                        <!-- Created side-by-side layout for institution type and code -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tipo-instituicao">Tipo de Instituição</label>
+                                <div class="input-wrapper">
+                                    <select id="tipo-instituicao" required>
+                                        <option value="">Selecione o tipo</option>
+                                        <option value="ETEC">ETEC</option>
+                                        <option value="FATEC">FATEC</option>
+                                    </select>
+                                    <div class="input-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div id="outro-tipo" class="conditional-field">
+                                    <input type="text" id="tipo-instituicao-outro" placeholder="Especifique o tipo"
+                                        minlength="3">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="codigo-instituicao">Código</label>
+                                <div class="input-wrapper">
+                                    <input id="codigo-instituicao" type="text" placeholder="Ex: 001" required
+                                        minlength="3" maxlength="20">
+                                    <div class="input-icon">
+                                        <svg viewBox="0 0 24 24">
+                                            <path
+                                                d="M4,4A2,2 0 0,0 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6A2,2 0 0,0 20,4H4M4,6H20V18H4V6M6,8V10H8V8H6M10,8V10H18V8H10M6,12V14H8V12H6M10,12V14H18V12H10Z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email-instituicao">Email Institucional</label>
+                            <div class="input-wrapper">
+                                <input id="email-instituicao" type="email" placeholder="contato@instituicao.edu.br"
+                                    required>
+                                <div class="input-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path
+                                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <p class="input-help">Email oficial da instituição para contato</p>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="cep">CEP</label>
+                        <div class="input-wrapper">
+                            <input id="cep" type="text" placeholder="00000-000" required pattern="\d{5}-?\d{3}" maxlength="9">
+                            <div class="input-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 2C8.1 2 5 5.1 5 9c0 5.3 7 13 7 13s7-7.7 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 
+                                0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/>
+                            </svg>
+                            </div>
+                        </div>
+                        <p class="input-help">Digite o CEP da instituição</p>
+                        </div>
+
+                        <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <div class="input-wrapper">
+                            <input id="telefone" type="text" placeholder="(00) 00000-0000" required pattern="\(\d{2}\) \d{4,5}-\d{4}">
+                            <div class="input-icon">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M6.62 10.79a15.91 15.91 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.49 2.53.76 3.88.76a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 22 2 13.93 2 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.21 1.11l-2.2 2.2z"/>
+                            </svg>
+                            </div>
+                        </div>
+                        <p class="input-help">Telefone para contato da instituição</p>
+                        </div>
+
+                        <p id="mensagem"></p>
+
+                        <!-- Updated button text for institution registration -->
+                        <button type="submit" class="primary-button">Cadastrar Instituição</button>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <div class="recovery-link">
+                        <!-- Updated footer text for institution context -->
+                        Instituição já cadastrada? <a href="/login-instituicao" class="text-link">Fazer
+                            login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/cadastro-instituicao.js"></script>
+</body>
+
+</html>

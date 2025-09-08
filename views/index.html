@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTEGRA - Conectando ETECs, Empresas e Palestrantes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+</head>
+
+<body>
+    <div class="flex-col min-h-screen">
+        <!-- Navigation -->
+        <header class="sticky-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="/" class="logo-link">
+                            <img src="img/logo.png" alt="Logo INTEGRA" class="logo-image">
+                        </a>
+                    </div>
+
+                    <!-- Botão de menu hamburguer -->
+                    <button class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <!-- Menu de navegação principal -->
+                    <nav class="main-nav" id="mainNav">
+                        <a href="#sobre" class="nav-link">Sobre Nós</a>
+                        <a href="#empresas" class="nav-link">Empresas</a>
+                        <a href="#palestras" class="nav-link">Palestras</a>
+                        <a href="#contato" class="nav-link">Contato</a>
+                        <a href="/planos" class="nav-link">Planos</a>
+
+                        <div class="mobile-buttons">
+                            <a href="/login" class="button primary-button">Login</a>
+                            <a href="/cadastro" class="button secondary-button">Cadastre-se</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main class="flex-1">
+            <!-- Banner -->
+            <section class="banner-section">
+                <div class="container">
+                    <div class="banner-grid">
+                        <div class="banner-content">
+                            <h1 class="banner-title">Conectando ETECs, Empresas e Palestrantes</h1>
+                            <p class="banner-description">
+                                Uma plataforma inovadora que integra estudantes técnicos com o mercado de trabalho
+                                através de visitas
+                                técnicas e palestras.
+                            </p>
+                            <div class="banner-buttons">
+                                <a href="/login" class="button yellow-button">Acessar Plataforma</a>
+                                <a href="#sobre" class="button outline-button light">
+                                    Saiba Mais <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="banner-image">
+                            <div class="banner-image-placeholder">
+                                <img src="img/banner.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Colocando a onda dentro do banner -->
+                <div class="wave-section">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+            </section>
+
+            <!-- Sobre Nós -->
+            <section id="sobre" class="section">
+                <div class="container">
+                    <div class="section-header animate-on-scroll">
+                        <h2 class="section-title">Sobre Nós</h2>
+                        <p class="section-description">
+                            O INTEGRA é uma iniciativa que visa aproximar os estudantes das Escolas Técnicas Estaduais
+                            (ETECs) do mercado de trabalho, proporcionando experiências práticas através de visitas
+                            técnicas e
+                            palestras com profissionais e empresas de destaque.
+                        </p>
+                    </div>
+                    <div class="cards-grid">
+                        <div class="card animate-on-scroll stagger-1">
+                            <div class="card-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="card-title">Estudantes</h3>
+                            <p class="card-text">
+                                Acesso a visitas técnicas, palestras e oportunidades de estágio e emprego.
+                            </p>
+                        </div>
+                        <div class="card animate-on-scroll stagger-2">
+                            <div class="card-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3 class="card-title">Empresas</h3>
+                            <p class="card-text">
+                                Conexão com talentos em formação e divulgação da marca para futuros profissionais.
+                            </p>
+                        </div>
+                        <div class="card animate-on-scroll stagger-3">
+                            <div class="card-icon">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <h3 class="card-title">Palestrantes</h3>
+                            <p class="card-text">
+                                Compartilhamento de conhecimento e experiência com a próxima geração de profissionais.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Empresas Parceiras -->
+            <section id="empresas" class="section light-bg">
+                <div class="container">
+                    <div class="section-header animate-on-scroll">
+                        <h2 class="section-title">Empresas Parceiras</h2>
+                        <p class="section-description">
+                            Conheça algumas das empresas que já fazem parte do nosso ecossistema de inovação e
+                            oportunidades.
+                        </p>
+                    </div>
+
+                    <!-- Filtros de categoria -->
+                    <div class="partners-categories animate-on-scroll">
+                        <button class="category-filter active" data-category="all">Todas</button>
+                        <button class="category-filter" data-category="tech">Tecnologia</button>
+                        <button class="category-filter" data-category="finance">Financeiro</button>
+                        <button class="category-filter" data-category="education">Educação</button>
+                        <button class="category-filter" data-category="health">Saúde</button>
+                    </div>
+
+                    <!-- Grid de empresas -->
+                    <div class="partners-grid" id="listaEmpresas">
+                        <!-- Empresas serão carregadas aqui via JS -->
+                    </div>
+
+
+            
+            <section id="palestras" class="section">
+                <div class="container">
+                    <div class="section-header animate-on-scroll">
+                        <h2 class="section-title">Próximas Palestras e Visitas</h2>
+                        <p class="section-description">
+                            Confira os próximos eventos disponíveis para os estudantes das ETECs.
+                        </p>
+                    </div>
+                </div>
+                <!-- Próximas Palestras -->
+                <div class="events-grid" id="listaEventos">
+                    <!-- Eventos serão carregados aqui via JS -->
+                </div>
+            </section>
+
+            <!-- Contato -->
+            <section id="contato" class="section light-bg">
+                <div class="container">
+                    <div class="contact-grid">
+                        <div class="contact-info animate-on-scroll">
+                            <h2 class="section-title">Entre em Contato</h2>
+                            <p class="section-description">
+                                Tem alguma dúvida ou sugestão? Entre em contato conosco. Estamos sempre à disposição
+                                para ajudar.
+                            </p>
+                        </div>
+                        <div class="contact-form animate-on-scroll">
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <input type="text" name="nome" placeholder="Seu Nome" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="Seu E-mail" required>
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="mensagem" placeholder="Sua Mensagem" required></textarea>
+                                </div>
+                                <button type="submit" class="button primary-button">
+                                    <span class="button-text">Enviar</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-about animate-on-scroll stagger-1">
+                        <h3 class="footer-title">Sobre Nós</h3>
+                        <p class="footer-description">
+                            INTEGRA conecta estudantes das ETECs com o mercado de trabalho, oferecendo oportunidades de
+                            aprendizado e
+                            desenvolvimento.
+                        </p>
+                    </div>
+                    <div class="footer-links animate-on-scroll stagger-2">
+                        <h3 class="footer-title">Links Úteis</h3>
+                        <ul class="footer-menu">
+                            <li><a href="#sobre">Sobre Nós</a></li>
+                            <li><a href="#empresas">Empresas</a></li>
+                            <li><a href="#palestras">Palestras</a></li>
+                            <li><a href="#contato">Contato</a></li>
+                            <li><a href="/privacy">Política de Privacidade</a></li>
+                            <li><a href="/terms">Termos de Uso</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-contact animate-on-scroll stagger-3">
+                        <h3 class="footer-title">Contato</h3>
+                        <p>Email: integra@gmail.com</p>
+                        <p>Telefone: (11) 9999-9999</p>
+                    </div>
+                    <div class="footer-social animate-on-scroll stagger-4">
+                        <h3 class="footer-title">Siga-nos</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 INTEGRA. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Animações de scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const windowHeight = window.innerHeight;
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('animated');
+                }
+            });
+        }
+
+        // Smooth scroll para links internos
+        function smoothScroll() {
+            const links = document.querySelectorAll('a[href^="#"]');
+
+            links.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+
+                    if (targetSection) {
+                        const headerHeight = document.querySelector('.sticky-header').offsetHeight;
+                        const targetPosition = targetSection.offsetTop - headerHeight - 20;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Formulário de contato
+        function setupContactForm() {
+            const form = document.getElementById('contactForm');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Adiciona estado de loading
+                form.classList.add('loading');
+                const button = form.querySelector('button[type="submit"]');
+                const buttonText = button.querySelector('.button-text');
+                buttonText.textContent = 'Enviando...';
+
+                // Simula envio (substitua por sua lógica real)
+                setTimeout(() => {
+                    form.classList.remove('loading');
+                    buttonText.textContent = 'Enviado!';
+
+                    // Reset após 2 segundos
+                    setTimeout(() => {
+                        form.reset();
+                        buttonText.textContent = 'Enviar';
+                    }, 2000);
+                }, 2000);
+            });
+        }
+
+        // Header scroll effect
+        function setupHeaderScroll() {
+            const header = document.querySelector('.sticky-header');
+            let lastScrollTop = 0;
+
+            window.addEventListener('scroll', function () {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    // Scrolling down
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    // Scrolling up
+                    header.style.transform = 'translateY(0)';
+                }
+
+                lastScrollTop = scrollTop;
+            });
+        }
+
+        // Parallax effect para o banner
+        function setupParallax() {
+            const banner = document.querySelector('.banner-section');
+
+            window.addEventListener('scroll', function () {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+
+                if (banner) {
+                    banner.style.transform = `translateY(${rate}px)`;
+                }
+            });
+        }
+
+        // Category filter functionality
+        function setupCategoryFilter() {
+            const categoryFilters = document.querySelectorAll('.category-filter');
+            const partnerCards = document.querySelectorAll('.partner-card');
+
+            categoryFilters.forEach(filter => {
+                filter.addEventListener('click', function () {
+                    const category = this.getAttribute('data-category');
+
+                    // Update active filter
+                    categoryFilters.forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Filter cards
+                    partnerCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'flex';
+                            card.style.animation = 'fadeInUp 0.6s ease forwards';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function () {
+            // Animação inicial
+            animateOnScroll();
+
+            // Setup de funcionalidades
+            smoothScroll();
+            setupContactForm();
+            setupHeaderScroll();
+            setupParallax();
+            setupCategoryFilter();
+
+            // Event listeners
+            window.addEventListener('scroll', animateOnScroll);
+
+            // Adiciona classe para elementos já visíveis
+            setTimeout(() => {
+                const visibleElements = document.querySelectorAll('.animate-on-scroll');
+                visibleElements.forEach(element => {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top < window.innerHeight) {
+                        element.classList.add('animated');
+                    }
+                });
+            }, 100);
+        });
+
+        // Performance optimization
+        let ticking = false;
+
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(animateOnScroll);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', function () {
+            requestTick();
+            ticking = false;
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('mainNav');
+
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+    </script>
+    <script type="module" src="js/empresa.js"></script>
+    <script type="module" src="js/eventos.js"></script>
+</body>
+
+</html>

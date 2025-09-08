@@ -1,0 +1,69 @@
+/* Melhorando o espaçamento entre a descrição e os botões */
+.card-description {
+  margin-bottom: 1rem; /* Reduzindo o espaçamento abaixo da descrição */
+}
+
+/* Ajustando a disposição dos botões (2 por linha) */
+.perfil-buttons {
+  display: flex;
+  flex-direction: column;  /* Coloca os botões em uma coluna */
+  align-items: center;  /* Centraliza os botões */
+  gap: 15px;  /* Espaçamento entre os botões */
+}
+
+/* Estilos para os botões */
+.perfil-button {
+  padding: 1.25rem 2rem;
+  background-color: var(--primary-color); /* Cor base do botão */
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem; /* Maior espaçamento entre ícone e texto */
+  width: 100%; /* Tornar o botão responsivo */
+  max-width: 15rem; /* Limitar o tamanho do botão */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.perfil-button i {
+  font-size: 1.5rem; /* Ícones maiores */
+}
+
+/* Efeito de hover para os botões */
+.perfil-button:hover {
+  background-color: #7e3f96; /* Cor ao passar o mouse */
+  transform: translateY(-5px); /* Deslocamento ao passar o mouse */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Sombras mais intensas */
+}
+
+/* Efeito de clique */
+.perfil-button:active {
+  transform: translateY(2px); /* Deixa o botão levemente "afundado" */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombras mais suaves ao clicar */
+}
+
+/* Adicionando foco nos botões para acessibilidade */
+.perfil-button:focus {
+  outline: none;
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(88, 43, 105, 0.2); /* Animação de foco */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 640px) {
+  .perfil-buttons {
+    grid-template-columns: 1fr; /* Um botão por linha em telas menores */
+  }
+
+  .perfil-button {
+    max-width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}

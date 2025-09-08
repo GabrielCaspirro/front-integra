@@ -1,0 +1,26 @@
+/* Action Buttons */
+.action-button {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #f3f4f6;
+}
+
+.action-button.delete {
+  color: #ef4444;
+}
+
+/* User Form Fields */
+.hidden {
+  display: none;
+}

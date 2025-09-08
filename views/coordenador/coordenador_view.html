@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard do Coordenador - INTEGRA</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/coordenador.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="flex-col min-h-screen">
+    <!-- Header -->
+    <header class="sticky-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="/" class="logo-link">
+              <img src="/img/logo.png" alt="Logo" class="logo-image" style="max-width: 200px; height: auto;">
+            </a>
+          </div>
+
+          <div class="user-actions">
+            <div class="user-info">
+              <div class="user-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <span class="user-name">Coordenador ETEC</span>
+            </div>
+            <a href="/login" class="logout-button">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="sr-only">Sair</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="container">
+        <div class="dashboard-header">
+          <h1 class="dashboard-title">Painel do Coordenador</h1>
+          <p class="dashboard-description">
+            Gerencie empresas, palestrantes e agende visitas técnicas e palestras.
+          </p>
+        </div>
+
+        <div class="tabs">
+          <div class="tabs-list" id="tabs-list">
+            <button class="tab-trigger active" data-tab="empresas">Empresas</button>
+            <button class="tab-trigger" data-tab="palestrantes">Palestrantes</button>
+            <button class="tab-trigger" data-tab="agendados">Eventos Agendados</button>
+            <button class="tab-trigger" data-tab="alunos">Alunos</button>
+          </div>
+
+          <div class="tab-content active" id="empresas-tab">
+            <div class="search-actions">
+              <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="search" id="search-input" class="search-input" placeholder="Buscar empresas...">
+              </div>
+              <button id="schedule-event-btn" class="button primary-button">
+                <i class="fas fa-plus"></i> Agendar Evento
+              </button>
+            </div>
+            <div class="cards-grid" id="empresas-grid">
+              <!-- Empresas cards will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="tab-content" id="palestrantes-tab">
+            <div class="search-actions">
+              <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="search" id="search-palestrantes" class="search-input" placeholder="Buscar palestrantes...">
+              </div>
+            </div>
+            <div class="cards-grid" id="palestrantes-grid">
+              <!-- Palestrantes cards will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="tab-content" id="agendados-tab">
+            <div class="card full-width">
+              <div class="card-header">
+                <h2 class="card-title">Eventos Agendados</h2>
+                <p class="card-description">Visitas técnicas e palestras confirmadas</p>
+              </div>
+              <div class="card-content">
+                <div class="events-list" id="eventos-agendados-list">
+                  <!-- Eventos agendados will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="alunos-tab">
+            <div class="search-actions">
+              <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="search" id="search-alunos" class="search-input" placeholder="Buscar alunos...">
+              </div>
+              <button id="add-student-btn" class="button primary-button">
+                <i class="fas fa-plus"></i> Adicionar Aluno
+              </button>
+            </div>
+            <div class="card full-width">
+              <div class="card-header">
+                <h2 class="card-title">Alunos da ETEC</h2>
+                <p class="card-description">Gerencie os alunos da sua escola</p>
+              </div>
+              <div class="card-content">
+                <div class="data-table-container">
+                  <table class="data-table" id="students-table">
+                    <thead>
+                      <tr>
+                        <th>Nome</th>
+                        <th>RM</th>
+                        <th>Curso</th>
+                        <th>Módulo/Ano</th>
+                        <th>Email</th>
+                        <th>Ações</th>
+                      </tr>
+                    </thead>
+                    <tbody id="students-list">
+                      <!-- Students will be populated by JavaScript -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Schedule Event Modal -->
+    <div class="modal" id="schedule-event-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Agendar Novo Evento</h3>
+          <p class="modal-description">Preencha os detalhes para agendar uma visita técnica ou palestra.</p>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="event-title">Título do Evento</label>
+            <input type="text" id="event-title" placeholder="Ex: Visita Técnica - Empresa X">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="event-date">Data</label>
+              <input type="date" id="event-date">
+            </div>
+            <div class="form-group">
+              <label for="event-time">Horário</label>
+              <input type="time" id="event-time">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="event-description">Descrição</label>
+            <textarea id="event-description" placeholder="Descreva o evento..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="confirm-schedule" class="button primary-button">Confirmar Agendamento</button>
+          <button id="close-schedule-modal" class="button outline-button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule Visit Modal -->
+    <div class="modal" id="schedule-visit-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Agendar Visita Técnica</h3>
+          <p class="modal-description" id="visit-modal-description">Preencha os detalhes para agendar uma visita.</p>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="visit-title">Título da Visita</label>
+            <input type="text" id="visit-title">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="visit-date">Data</label>
+              <input type="date" id="visit-date">
+            </div>
+            <div class="form-group">
+              <label for="visit-time">Horário</label>
+              <input type="time" id="visit-time">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="visit-description">Descrição</label>
+            <textarea id="visit-description" placeholder="Descreva a visita técnica..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="confirm-visit" class="button primary-button">Confirmar Agendamento</button>
+          <button id="close-visit-modal" class="button outline-button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schedule Lecture Modal -->
+    <div class="modal" id="schedule-lecture-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Agendar Palestra</h3>
+          <p class="modal-description" id="lecture-modal-description">Preencha os detalhes para agendar uma palestra.</p>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="lecture-title">Título da Palestra</label>
+            <input type="text" id="lecture-title">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="lecture-date">Data</label>
+              <input type="date" id="lecture-date">
+            </div>
+            <div class="form-group">
+              <label for="lecture-time">Horário</label>
+              <input type="time" id="lecture-time">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="lecture-description">Descrição</label>
+            <textarea id="lecture-description" placeholder="Descreva a palestra..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="confirm-lecture" class="button primary-button">Confirmar Agendamento</button>
+          <button id="close-lecture-modal" class="button outline-button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div class="modal" id="add-student-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Adicionar Novo Aluno</h3>
+          <p class="modal-description">Preencha os detalhes do aluno para adicioná-lo ao sistema.</p>
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="student-name">Nome Completo</label>
+              <input type="text" id="student-name" placeholder="Nome do aluno">
+            </div>
+            <div class="form-group">
+              <label for="student-rm">RM</label>
+              <input type="text" id="student-rm" placeholder="Registro de Matrícula">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="student-course">Curso</label>
+              <select id="student-course">
+                <option value="">Selecione o curso</option>
+                <option value="Informática para Internet">Informática para Internet</option>
+                <option value="Administração">Administração</option>
+                <option value="Recursos Humanos">Recursos Humanos</option>
+                <option value="Logística">Logística</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="student-module">Módulo/Ano</label>
+              <select id="student-module">
+                <option value="">Selecione o módulo/ano</option>
+                <option value="1º Módulo">1º Módulo</option>
+                <option value="2º Módulo">2º Módulo</option>
+                <option value="3º Módulo">3º Módulo</option>
+                <option value="1º Ano">1º Ano</option>
+                <option value="2º Ano">2º Ano</option>
+                <option value="3º Ano">3º Ano</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="student-email">Email</label>
+            <input type="email" id="student-email" placeholder="email@exemplo.com">
+          </div>
+          <div class="form-group">
+            <label for="student-password">Senha Temporária</label>
+            <input type="password" id="student-password" placeholder="Senha temporária">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="confirm-add-student" class="button primary-button">Adicionar Aluno</button>
+          <button id="close-student-modal" class="button outline-button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+      <div class="container">
+        <div class="footer-content">
+          <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
+          <div class="footer-links">
+            <a href="#" class="footer-link">Termos de Uso</a>
+            <a href="#" class="footer-link">Política de Privacidade</a>
+            <a href="#" class="footer-link">Suporte</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/js/coordenador.js"></script>
+</body>
+</html>

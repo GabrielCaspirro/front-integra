@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard do Palestrante - INTEGRA</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/palestrante.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="flex-col min-h-screen">
+    <!-- Header -->
+    <header class="sticky-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="/" class="logo-link">
+              <img src="/img/logo.png" alt="Logo" class="logo-image" style="max-width: 200px; height: auto;">
+            </a>
+          </div>
+
+          <div class="user-actions">
+            <div class="user-info">
+              <div class="user-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <span class="user-name">Ana Silva</span>
+            </div>
+            <a href="/login" class="logout-button">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="sr-only">Sair</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="container">
+        <div class="dashboard-header">
+          <h1 class="dashboard-title">Painel do Palestrante</h1>
+          <p class="dashboard-description">
+            Gerencie suas palestras e inscrições em empresas.
+          </p>
+        </div>
+
+        <div class="tabs">
+          <div class="tabs-list" id="tabs-list">
+            <button class="tab-trigger active" data-tab="palestras">
+              <i class="fas fa-chalkboard-teacher"></i> Palestras Disponíveis
+            </button>
+            <button class="tab-trigger" data-tab="empresas">
+              <i class="fas fa-building"></i> Empresas
+            </button>
+            <button class="tab-trigger" data-tab="agendados">
+              <i class="fas fa-calendar-check"></i> Meus Eventos
+            </button>
+          </div>
+
+          <div class="tab-content active" id="palestras-tab">
+            <div class="search-actions">
+              <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="search" id="search-palestras" class="search-input" placeholder="Buscar palestras...">
+              </div>
+            </div>
+            <div class="cards-grid" id="palestras-grid">
+              <!-- Palestras cards will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="tab-content" id="empresas-tab">
+            <div class="search-actions">
+              <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="search" id="search-empresas" class="search-input" placeholder="Buscar empresas...">
+              </div>
+            </div>
+            <div class="cards-grid" id="empresas-grid">
+              <!-- Empresas cards will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <div class="tab-content" id="agendados-tab">
+            <div class="card full-width">
+              <div class="card-header">
+                <h2 class="card-title">Meus Eventos</h2>
+                <p class="card-description">Palestras e inscrições confirmadas</p>
+              </div>
+              <div class="card-content">
+                <div class="events-list" id="eventos-agendados-list">
+                  <!-- Eventos agendados will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Apply to Company Modal -->
+    <div class="modal" id="apply-company-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Inscrever-se na Empresa</h3>
+          <p class="modal-description" id="company-modal-description">Preencha os detalhes para se inscrever nesta empresa.</p>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="apply-motivation">Carta de Motivação</label>
+            <textarea id="apply-motivation" placeholder="Descreva por que você gostaria de fazer parte desta empresa..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="apply-experience">Experiência Relevante</label>
+            <textarea id="apply-experience" placeholder="Descreva sua experiência relevante para esta empresa..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="apply-availability">Disponibilidade</label>
+            <input type="text" id="apply-availability" placeholder="Ex: Segundas e Quartas, 14h às 17h">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="confirm-apply" class="button primary-button">Enviar Inscrição</button>
+          <button id="close-apply-modal" class="button outline-button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register for Lecture Modal -->
+    <div class="modal" id="register-lecture-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Inscrever-se na Palestra</h3>
+          <p class="modal-description" id="lecture-modal-description">Confirme sua inscrição nesta palestra.</p>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="register-notes">Observações (opcional)</label>
+            <textarea id="register-notes" placeholder="Alguma observação ou necessidade especial..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="confirm-register" class="button primary-button">Confirmar Inscrição</button>
+          <button id="close-register-modal" class="button outline-button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+      <div class="container">
+        <div class="footer-content">
+          <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
+          <div class="footer-links">
+            <a href="#" class="footer-link">Termos de Uso</a>
+            <a href="#" class="footer-link">Política de Privacidade</a>
+            <a href="#" class="footer-link">Suporte</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/js/palestrante.js"></script>
+</body>
+</html>

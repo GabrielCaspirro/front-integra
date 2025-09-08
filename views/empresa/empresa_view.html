@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard da Empresa - INTEGRA</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/empresa.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="flex-col min-h-screen">
+    <!-- Header -->
+    <header class="sticky-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="/" class="logo-link">
+              <img src="/img/logo.png" alt="Logo" class="logo-image" style="max-width: 200px; height: auto;">
+            </a>
+          </div>
+
+          <div class="user-actions">
+            <div class="notification-badge" data-count="2" id="notification-icon">
+              <button class="notification-button">
+                <i class="fas fa-bell"></i>
+              </button>
+            </div>
+            <div class="user-info">
+              <div class="user-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <span class="user-name">TechSolutions</span>
+            </div>
+            <a href="/login" class="logout-button">
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="sr-only">Sair</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="container">
+        <div class="dashboard-header-row">
+          <div class="dashboard-header">
+            <h1 class="dashboard-title">Painel da Empresa</h1>
+            <p class="dashboard-description">
+              Gerencie suas disponibilidades para visitas técnicas e palestras.
+            </p>
+          </div>
+          <button id="add-availability-btn" class="button primary-button">
+            <i class="fas fa-plus"></i> Nova Disponibilidade
+          </button>
+        </div>
+
+        <div class="tabs">
+          <div class="tabs-list" id="tabs-list">
+            <button class="tab-trigger active" data-tab="disponibilidades">
+              <i class="fas fa-calendar-alt"></i> Disponibilidades
+            </button>
+            <button class="tab-trigger" data-tab="eventos">
+              <i class="fas fa-calendar-check"></i> Eventos Agendados
+            </button>
+            <button class="tab-trigger" data-tab="palestrantes">
+              <i class="fas fa-user-tie"></i> Palestrantes
+            </button>
+          </div>
+
+          <div class="tab-content active" id="disponibilidades-tab">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Minhas Disponibilidades</h2>
+                <p class="card-description">Visitas técnicas e palestras disponíveis para agendamento</p>
+              </div>
+              <div class="card-content">
+                <div class="availability-list" id="availability-list">
+                  <!-- Availability items will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="eventos-tab">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Eventos Agendados</h2>
+                <p class="card-description">Visitas técnicas e palestras confirmadas</p>
+              </div>
+              <div class="card-content">
+                <div class="scheduled-events" id="scheduled-events">
+                  <!-- Scheduled events will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="palestrantes-tab">
+            <div class="card">
+              <div class="card-header">
+                <h2 class="card-title">Solicitações de Palestrantes</h2>
+                <p class="card-description">Palestrantes que desejam fazer parte da sua empresa</p>
+              </div>
+              <div class="card-content">
+                <div class="notification-list" id="speaker-requests">
+                  <!-- Speaker requests will be populated by JavaScript -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Add Availability Modal -->
+    <div class="modal" id="add-availability-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Adicionar Nova Disponibilidade</h3>
+          <p class="modal-description">
+            Preencha os detalhes para oferecer uma visita técnica ou palestra para as ETECs.
+          </p>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="availability-title">Título</label>
+            <input type="text" id="availability-title" placeholder="Ex: Visita ao Departamento de TI">
+          </div>
+          <div class="form-group">
+            <label for="availability-type">Tipo</label>
+            <select id="availability-type">
+              <option value="">Selecione o tipo</option>
+              <option value="Visita Técnica">Visita Técnica</option>
+              <option value="Palestra">Palestra</option>
+              <option value="Workshop">Workshop</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="availability-description">Descrição</label>
+            <textarea id="availability-description" placeholder="Descreva a atividade..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="availability-schedule">Disponibilidade</label>
+            <input type="text" id="availability-schedule" placeholder="Ex: Segundas e Quartas, 14h às 17h">
+          </div>
+          <div class="form-group">
+            <label for="availability-slots">Número de Vagas</label>
+            <input type="number" id="availability-slots" placeholder="Ex: 20">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="confirm-availability" class="button primary-button">Adicionar</button>
+          <button id="close-availability-modal" class="button outline-button">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications Dropdown -->
+    <div class="notifications-dropdown" id="notifications-dropdown">
+      <div class="notifications-header">
+        <h3>Notificações</h3>
+        <button id="close-notifications">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="notifications-content">
+        <div class="notification-item unread">
+          <div class="notification-header">
+            <span class="notification-title">Nova solicitação de palestrante</span>
+            <span class="notification-time">Hoje</span>
+          </div>
+          <p class="notification-content">Ana Silva deseja se tornar palestrante em sua empresa.</p>
+          <div class="notification-actions">
+            <button class="button small-button primary-button">Ver Detalhes</button>
+          </div>
+        </div>
+        <div class="notification-item unread">
+          <div class="notification-header">
+            <span class="notification-title">Evento agendado</span>
+            <span class="notification-time">Ontem</span>
+          </div>
+          <p class="notification-content">ETEC São Paulo agendou uma visita técnica para 20/06/2025.</p>
+          <div class="notification-actions">
+            <button class="button small-button primary-button">Ver Detalhes</button>
+          </div>
+        </div>
+      </div>
+      <div class="notifications-footer">
+        <button class="button outline-button small-button full-width">Ver Todas</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="dashboard-footer">
+      <div class="container">
+        <div class="footer-content">
+          <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
+          <div class="footer-links">
+            <a href="#" class="footer-link">Termos de Uso</a>
+            <a href="#" class="footer-link">Política de Privacidade</a>
+            <a href="#" class="footer-link">Suporte</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/js/empresa.js"></script>
+</body>
+</html>
