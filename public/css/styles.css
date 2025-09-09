@@ -739,8 +739,24 @@ textarea {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.event-bar-salas{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   border-bottom-left-radius: 0;
@@ -777,6 +793,22 @@ textarea {
 }
 
 .event-preenchido-descricao {
+  text-align: center;
+  display: flex;
+  flex-grow: 0;
+  padding: 0.25rem 0.75rem;
+  background-color: #f2e9f7;
+  color: var(--text-color);
+  margin-left: auto;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.event-preenchido-salas {
   text-align: center;
   display: flex;
   flex-grow: 0;
@@ -880,4 +912,9 @@ textarea {
 .pula-linha {
   display: block;
   margin-bottom: 0.5rem;
+}
+
+.pula-linha-botao {
+  display: block;
+  margin-bottom: 1rem;
 }

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprovar Palestrantes - Empresa - INTEGRA</title>
+    <link rel="icon" href="../../img/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="stylesheet" href="../../css/empresa.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/styles.css">        
+    <link rel="stylesheet" href="../../css/palestrantesempresa.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="flex-col min-h-screen">
+        <!-- Header -->
+        <header class="sticky-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <img src="../../img/logo.png" alt="Logo INTEGRA" class="logo-image">
+                        </a>
+                    </div>
+
+                    <!-- Botão de menu hamburguer -->
+                    <button class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <!-- Menu de navegação principal -->
+                    <nav class="main-nav" id="mainNav">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="vagas.html" class="nav-link">Meus Eventos</a>
+                        <a href="agendados.html" class="nav-link">Agendados</a>
+                        <a href="palestrantes-empresa.html" class="nav-link">Meus Palestrantes</a>
+
+                        <!-- User Profile -->
+                        <div class="user-info" id="user-profile-btn">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <p>TechSolutions</p>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+
+                        <div class="mobile-buttons">
+                            <a href="../../login/login.html" class="button primary-button">Sair</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="section primeiro">
+                <div class="container">
+                    <div class="welcome-section">
+                        <h1 class="welcome-title">
+                            <i class="fas fa-user-check section-icon"></i>
+                            Aprovar Palestrantes
+                        </h1>
+                        <p class="welcome-description">Gerencie e aprove palestrantes para suas visitas técnicas e workshops</p>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" id="pendingCount">8</h3>
+                                <p class="stat-label">Pendentes</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon approved">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" id="approvedCount">24</h3>
+                                <p class="stat-label">Aprovados</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon rejected">
+                                <i class="fas fa-times-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" id="rejectedCount">3</h3>
+                                <p class="stat-label">Rejeitados</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-number" id="totalCount">35</h3>
+                                <p class="stat-label">Total</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filters and Tabs -->
+                    <div class="filters-section">
+                        <div class="tabs-container">
+                            <div class="tabs">
+                                <button class="tab-button active" data-tab="pending">
+                                    <i class="fas fa-clock"></i>
+                                    Pendentes
+                                    <span class="tab-count">8</span>
+                                </button>
+                                <button class="tab-button" data-tab="approved">
+                                    <i class="fas fa-check-circle"></i>
+                                    Aprovados
+                                    <span class="tab-count">24</span>
+                                </button>
+                                <button class="tab-button" data-tab="rejected">
+                                    <i class="fas fa-times-circle"></i>
+                                    Rejeitados
+                                    <span class="tab-count">3</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="filters">
+                            <div class="search-box">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="searchInput" placeholder="Buscar palestrantes...">
+                            </div>
+                            <select id="areaFilter" class="filter-select">
+                                <option value="">Todas as áreas</option>
+                                <option value="tecnologia">Tecnologia</option>
+                                <option value="industria">Indústria</option>
+                                <option value="inovacao">Inovação</option>
+                                <option value="sustentabilidade">Sustentabilidade</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Speakers Grid -->
+                    <div class="speakers-container">
+                        <div class="tab-content active" id="pending-content">
+                            <div class="speakers-grid" id="pendingSpeakers">
+                                <!-- Pending speakers will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="approved-content">
+                            <div class="speakers-grid" id="approvedSpeakers">
+                                <!-- Approved speakers will be populated by JavaScript -->
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="rejected-content">
+                            <div class="speakers-grid" id="rejectedSpeakers">
+                                <!-- Rejected speakers will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="dashboard-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Termos de Uso</a>
+                        <a href="#" class="footer-link">Política de Privacidade</a>
+                        <a href="#" class="footer-link">Suporte</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Speaker Details Modal -->
+    <div class="modal-overlay" id="speakerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Detalhes do Palestrante</h2>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Speaker details will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    <script src="../../js/palestrantes-empresa.js"></script>
+</body>
+
+</html>

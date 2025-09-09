@@ -1,4 +1,4 @@
-import { getEmpresas } from "../js/api/index.js";
+import { getEmpresas, getUsuarioLogado } from "../js/api/index.js";
 import { BASE_URL_IMG } from "./api/config.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -25,5 +25,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   } catch (err) {
     console.error(err);
+  }
+});
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const usuario = await getUsuarioLogado();
+
+    if (usuario && usuario.nome) {
+      const empresaNome = document.getElementById("empresaNome");
+      if (empresaNome) empresaNome.textContent = usuario.nome;
+    }
+  } catch (err) {
+    console.error("Erro ao carregar usuário logado:", err);
   }
 });

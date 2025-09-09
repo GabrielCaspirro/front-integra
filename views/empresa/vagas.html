@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Visitas Técnicas - Empresa - INTEGRA</title>
+    <link rel="icon" href="../../img/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="stylesheet" href="../../css/empresa.css">
+    <link rel="stylesheet" href="../../css/dashboard.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/vagas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="flex-col min-h-screen">
+        <!-- Header -->
+        <header class="sticky-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="home.html" class="logo-link">
+                            <img src="../../img/logo.png" alt="Logo INTEGRA" class="logo-image">
+                        </a>
+                    </div>
+
+                    <button class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <nav class="main-nav" id="mainNav">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="vagas.html" class="nav-link">Meus Eventos</a>
+                        <a href="agendados.html" class="nav-link">Agendados</a>
+                        <a href="palestrantes-empresa.html" class="nav-link">Meus Palestrantes</a>
+
+                        <!-- User Profile -->
+                        <div class="user-info" id="user-profile-btn">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <p>TechSolutions</p>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+
+                        <div class="mobile-buttons">
+                            <a href="../../login/login.html" class="button primary-button">Sair</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="section primeiro">
+                <div class="container">
+                    <div class="page-header">
+                        <div class="page-title-section">
+                            <!-- Updated title and description for technical visits -->
+                            <h1 class="page-title">
+                                <i class="fas fa-building page-icon"></i>
+                                Minhas Visitas Técnicas
+                            </h1>
+                        </div>
+                        <div class="page-actions">
+                            <a href="nova-vaga.html" class="btn-primary">
+                                <i class="fas fa-plus"></i>
+                                Nova Visita
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Updated stats cards for technical visits -->
+                    <div class="jobs-stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon blue">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="totalVisits">0</h3>
+                                <p>Total de Visitas</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon green">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="activeVisits">0</h3>
+                                <p>Visitas Ativas</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon orange">
+                                <i class="fas fa-school"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="totalInstitutions">0</h3>
+                                <p>Instituições Interessadas</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon purple">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 id="scheduledVisits">0</h3>
+                                <p>Visitas Agendadas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="container">
+                    <div class="filters-section">
+                        <div class="filters-header">
+                            <!-- Updated filter title -->
+                            <h2 class="section-title">Filtrar Visitas</h2>
+                        </div>
+                        <div class="filters-grid">
+                            <div class="filter-group">
+                                <label for="statusFilter">Status</label>
+                                <select id="statusFilter" class="filter-select">
+                                    <option value="all">Todas</option>
+                                    <option value="active">Ativas</option>
+                                    <option value="paused">Pausadas</option>
+                                    <option value="closed">Fechadas</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <!-- Changed from job level to visit type -->
+                                <label for="typeFilter">Tipo de Visita</label>
+                                <select id="typeFilter" class="filter-select">
+                                    <option value="all">Todos</option>
+                                    <option value="tecnica">Técnica</option>
+                                    <option value="palestra">Palestra</option>
+                                    <option value="workshop">Workshop</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <!-- Changed from job area to company area -->
+                                <label for="areaFilter">Área da Empresa</label>
+                                <select id="areaFilter" class="filter-select">
+                                    <option value="all">Todas</option>
+                                    <option value="tecnologia">Tecnologia</option>
+                                    <option value="industria">Indústria</option>
+                                    <option value="servicos">Serviços</option>
+                                    <option value="saude">Saúde</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label for="searchFilter">Buscar</label>
+                                <!-- Updated placeholder text -->
+                                <input type="text" id="searchFilter" class="filter-input" placeholder="Título da visita...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="container">
+                    <div class="jobs-section">
+                        <div class="section-header">
+                            <!-- Updated section title -->
+                            <h2 class="section-title">Suas Visitas Publicadas</h2>
+                            <div class="view-toggle">
+                                <button class="view-btn active" data-view="grid">
+                                    <i class="fas fa-th-large"></i>
+                                </button>
+                                <button class="view-btn" data-view="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="jobs-grid" id="visitsGrid">
+                            <!-- Visits will be populated by JavaScript -->
+                        </div>
+
+                        <div class="jobs-list" id="visitsList" style="display: none;">
+                            <!-- Visits list view will be populated by JavaScript -->
+                        </div>
+
+                        <div class="empty-state" id="emptyState" style="display: none;">
+                            <div class="empty-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <!-- Updated empty state text for visits -->
+                            <h3>Nenhuma visita encontrada</h3>
+                            <p>Você ainda não publicou nenhuma visita técnica ou nenhuma visita corresponde aos filtros aplicados.</p>
+                            <a href="nova-visita.html" class="btn-primary">
+                                <i class="fas fa-plus"></i>
+                                Criar Primeira Visita
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="dashboard-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Termos de Uso</a>
+                        <a href="#" class="footer-link">Política de Privacidade</a>
+                        <a href="#" class="footer-link">Suporte</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Updated modal for visit actions -->
+    <div class="modal" id="visitActionsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ações da Visita</h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="job-actions-list">
+                    <!-- Removed edit button as requested -->
+                    <button class="action-btn" id="viewInstitutionsBtn">
+                        <i class="fas fa-school"></i>
+                        Ver Instituições Interessadas
+                    </button>
+                    <button class="action-btn" id="scheduleVisitBtn">
+                        <i class="fas fa-calendar-plus"></i>
+                        Agendar Visita
+                    </button>
+                    <button class="action-btn" id="contactInstitutionBtn">
+                        <i class="fas fa-phone"></i>
+                        Contatar Instituição
+                    </button>
+                    <button class="action-btn" id="pauseVisitBtn">
+                        <i class="fas fa-pause"></i>
+                        Pausar Visita
+                    </button>
+                    <button class="action-btn danger" id="deleteVisitBtn">
+                        <i class="fas fa-trash"></i>
+                        Excluir Visita
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Updated modal for showing interested institutions with white background -->
+    <div class="modal" id="institutionsModal">
+        <div class="modal-content institutions-modal">
+            <div class="modal-header">
+                <h3>Instituições Interessadas</h3>
+                <button class="modal-close" id="closeInstitutionsModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="institutionsList">
+                    <!-- Institutions will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../js/vagas.js"></script>
+</body>
+
+</html>

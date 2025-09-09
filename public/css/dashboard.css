@@ -485,3 +485,40 @@
     grid-column: span 2;
   }
 }
+
+/* Coordenador Page Styles */
+.main-content {
+  flex: 1;
+  padding: 6rem 0 2rem;
+  background: linear-gradient(135deg, #f8f5fb, #f0e6f6);
+  min-height: calc(100vh - 4rem);
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.page-description {
+  font-size: 1.125rem;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.nav-link.active {
+  color: var(--secondary-color);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  width: 100%;
+  background: var(--secondary-color);
+}

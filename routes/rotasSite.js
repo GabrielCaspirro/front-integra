@@ -18,6 +18,22 @@ router.get('/empresa', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/empresa/empresa_view.html'));
 });
 
+router.get('/nova-vaga', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/empresa/nova-vaga.html'));
+});
+
+router.get('/agendados', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/empresa/agendados.html'));
+});
+
+router.get('/palestrantes-empresa', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/empresa/palestrante-empresa.html'));
+});
+
+router.get('/vagas', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/empresa/vagas.html'));
+});
+
 router.get('/estudante', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/estudante/estudante_view.html'));
 });
@@ -76,5 +92,11 @@ router.get('/login-palestrante', (req, res) => {
 router.get('/planos', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/planos/planos.html'));
 });
+
+router.get('/recupera-senha', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/recupera_senha.html'));
+});
+
+
 
 module.exports = router;

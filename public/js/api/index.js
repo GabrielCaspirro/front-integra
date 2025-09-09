@@ -1,5 +1,17 @@
+import { BASE_URL } from "./config.js";
+
 export * from "../api/empresa.js";
 export * from "../api/eventos.js";
 export * from "../api/login.js";
 export * from "../api/cadastros.js";
 export * from "../api/instituicao.js";
+
+export async function getUsuarioLogado() {
+  const response = await fetch(`${BASE_URL}/login`, {
+    method: "GET",
+    credentials: "include" 
+  });
+
+  if (!response.ok) throw new Error("Não foi possível obter o usuário logado");
+  return response.json();
+}

@@ -10,11 +10,17 @@ export async function cadastrarEmpresa(formData) {
   try {
     const response = await fetch(`${BASE_URL}/inserir-empresa`, {
       method: "POST",
-      body: formData, // enviar FormData direto
-      // NÃO colocar headers: { "Content-Type": "application/json" }
+      body: formData,
     });
 
-    return await response.json();
+    const contentType = response.headers.get("content-type");
+
+    if (contentType && contentType.includes("application/json")) {
+      return await response.json();
+    } else {
+      const texto = await response.text();
+      throw new Error(`Resposta inesperada da API: ${texto}`);
+    }
   } catch (erro) {
     console.error("Erro na requisição:", erro);
     return null;
