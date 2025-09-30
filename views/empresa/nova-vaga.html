@@ -113,14 +113,11 @@
                       <input type="date" id="data" class="form-input" required>
                     </div>
 
-                    <div class="form-group">
-                      <label for="horario_inicio" class="form-label"><i class="fas fa-clock"></i> Horário Início *</label>
-                      <input type="time" id="horario_inicio" class="form-input" required>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="horario_final" class="form-label"><i class="fas fa-clock"></i> Horário Término *</label>
-                      <input type="time" id="horario_final" class="form-input" required>
+                    <div id="horarios-container">
+                      <label for="novo-horario">Opções de horários:</label>
+                      <input type="text" id="novo-horario" placeholder="Ex: 14h às 17h">
+                      <button type="button" id="adicionar-horario">Adicionar</button>
+                      <ul id="lista-horarios"></ul>
                     </div>
 
                     <div class="form-group">
