@@ -11,7 +11,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     return;
   }
 
-  const id_empresa = usuario.id;
+  console.log('perfil do usuário:', usuario);
+
+  // resolve possíveis nomes de campo que o buscarPerfil retorne
+  const id_empresa = usuario?.id ?? usuario?.id_empresa ?? usuario?.empresaId;
+  console.log('id_empresa resolvido:', id_empresa);
 
   // --- Atualizar header com nome e logo ---
   const userInfo = document.querySelector('#user-profile-btn p');
@@ -72,37 +76,106 @@ document.addEventListener('DOMContentLoaded', async () => {
     atualizarPreviewHorarios();
   });
 
+  
+
   // --- Submissão do formulário ---
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-
+  
+    // --- montar payload com coerência de tipos ---
+    const rawValor = document.getElementById('valor')?.value;
+    const valorNum = rawValor === '' ? 0 : Number(rawValor);
+    if (Number.isNaN(valorNum)) {
+      alert('Valor inválido. Verifique o campo Valor.');
+      return;
+    }
+  
+    const cepRaw = (document.getElementById('cep')?.value || '').replace(/\D/g, '');
     const payload = {
       nome: (elTitle.value || '').trim(),
       descricao: (elDesc.value || '').trim(),
       data: elDate.value,
-      opcoes_horarios: horarios,
-      valor: parseFloat(document.getElementById('valor').value),
+      opcoes_horarios: horarios, // array por padrão
+      valor: valorNum,
       tipo: elArea.value,
-      cep: (document.getElementById('cep').value || '').replace(/\D/g, ''),
-      id_empresa
+      cep: cepRaw,
+      id_empresa: Number(id_empresa) || id_empresa
     };
-
-    // validação básica
+  
+    // --- validação básica antes de enviar ---
     const missing = [];
     ['nome','descricao','data','opcoes_horarios','valor','tipo','cep'].forEach(k => {
-      if (!payload[k] || (Array.isArray(payload[k]) && payload[k].length === 0)) missing.push(k);
+      const v = payload[k];
+      if (v === undefined || v === null || v === '' || (Array.isArray(v) && v.length === 0)) missing.push(k);
     });
     if (missing.length) {
       alert('Preencha os campos: ' + missing.join(', '));
+      console.log('Payload incompleto (não enviado):', payload);
       return;
     }
-
-    if (payload.valor === 0) payload.valor = 0.01; // workaround backend
-
+  
+    // força valor mínimo por limitação do backend
+    if (payload.valor === 0) payload.valor = 0.01;
+  
+    // --- debug: mostrar payload no console para inspeção no Network/DevTools ---
+    console.log('Tentando criar evento — payload inicial:', payload);
+  
     try {
       const result = await criarEvento(payload);
-      alert(result?.mensagem || 'Evento cadastrado com sucesso!');
+      console.log('Resposta da API (primeira tentativa):', result);
+  
+      // Se a API retornar algo que indique campos faltando, tentamos fallback:
+      const mensagem = (result && (result.mensagem || result.message || JSON.stringify(result))) || '';
+      if (/campo|obrigat|falt/i.test(mensagem) && horarios.length > 0) {
+        // fallback: muitos backends esperam horários como string JSON
+        const payloadAlt = { ...payload, opcoes_horarios: JSON.stringify(horarios) };
+        console.warn('API indicou campos faltando — tentando fallback com opcoes_horarios stringificada:', payloadAlt);
+        try {
+          const resultAlt = await criarEvento(payloadAlt);
+          console.log('Resposta da API (fallback):', resultAlt);
+          alert(resultAlt?.mensagem || 'Evento cadastrado com sucesso (fallback)!');
+        } catch (errAlt) {
+          console.error('Erro no fallback:', errAlt);
+          alert('Erro ao criar evento (fallback): ' + (errAlt?.message || JSON.stringify(errAlt)));
+        }
+      } else {
+        alert(result?.mensagem || 'Evento cadastrado com sucesso!');
+      }
 
+      let tipoPreview;
+      if(payload.tipo === "visita_tecnica"){
+        tipoPreview = "Visita Técnica";
+      }else if(payload.tipo === "palestra"){
+        tipoPreview = "Palestra";
+      }else{
+        tipoPreview = "Outro";
+      }
+
+      const previewContainer = document.getElementById('visitPreview');
+      if (previewContainer) {
+        previewContainer.innerHTML = `
+          <div class="job-header">
+            <div>
+              <h3 class="job-title">${payload.nome}</h3>
+              <div class="job-meta">
+                <span class="job-area">${tipoPreview}</span>
+              </div>
+            </div>
+          </div>
+          <div class="job-details">
+            <div class="job-description">
+              <h4>Descrição</h4>
+              <p>${payload.descricao}</p>
+            </div>
+            <div class="job-meta-row">
+              <div class="job-meta-item"><i class="fas fa-calendar"></i><span>${payload.data}</span></div>
+              <div class="job-meta-item"><i class="fas fa-clock"></i><span>${payload.opcoes_horarios.join(', ')}</span></div>
+              <div class="job-meta-item"><i class="fas fa-dollar-sign"></i><span>R$ ${payload.valor.toFixed(2)}</span></div>
+            </div>
+          </div>
+        `;
+      }
+    
       // reset form e preview
       form.reset();
       horarios.length = 0;
@@ -113,10 +186,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       previewDate.textContent = 'Data';
       previewTime.textContent = 'Horário';
     } catch (err) {
-      console.error('Erro ao criar evento:', err);
-      alert('Erro ao criar evento: ' + (err?.message || err));
+      // exibir resposta bruta quando possível
+      console.error('Erro ao criar evento (catch):', err);
+      // se err for um objeto com resposta JSON try parse (depende de como sua criarEvento lança)
+      alert('Erro ao criar evento: ' + (err?.message || JSON.stringify(err)));
     }
   });
+  
 
   // --- Botão cancelar ---
   document.getElementById('cancelBtn')?.addEventListener('click', () => {

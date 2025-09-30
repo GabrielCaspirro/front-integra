@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (empresaNome) empresaNome.textContent = usuario.nome;
       if (nomeEmpresa) nomeEmpresa.textContent = usuario.nome;
 
+      console.log(usuario)
+
       console.log(BASE_URL_IMG + usuario.logo);
 
       // 👇 Atualizar foto de perfil
@@ -48,8 +50,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       // 👇 Atualizar eventos
-      const eventosDisponiveis = await getEventosEmpresa(usuario.id_empresa);
-      const eventosAgendados = await getEventosConfirmadosEmpresa(usuario.id_empresa);
+      const eventosDisponiveis = await getEventosEmpresa(usuario.id);
+      const eventosAgendados = await getEventosConfirmadosEmpresa(usuario.id);
 
       document.querySelector(".stat-card:nth-child(1) h3").textContent = eventosDisponiveis.length;
       document.querySelector(".stat-card:nth-child(2) h3").textContent = eventosAgendados.length;
