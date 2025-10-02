@@ -40,3 +40,30 @@ export async function getEventosConfirmadosEmpresa(id_empresa) {
   if (!res.ok) throw new Error("Erro ao buscar eventos confirmados");
   return res.json();
 }
+
+export async function buscarSolicitacoes(id_empresa) {
+  try {
+    const res = await fetch(`${BASE_URL}/solicitacoes/empresa/${id_empresa}`);
+    if (!res.ok) throw new Error("Erro ao buscar solicitações");
+    return await res.json();
+  } catch (err) {
+    console.error(err);
+    return [];
+  }
+}
+
+export async function responderSolicitacao(id_solicitacao, aceitar) {
+  try {
+    const res = await fetch(`${BASE_URL}/responder-solicitacao`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id_solicitacao, aceitar }),
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.erro || "Erro ao responder solicitação");
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}

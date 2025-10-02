@@ -81,25 +81,7 @@
                             </div>
                             <div class="stat-content">
                                 <h3 id="totalVisits">0</h3>
-                                <p>Total de Visitas</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon green">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                            <div class="stat-content">
-                                <h3 id="activeVisits">0</h3>
-                                <p>Visitas Ativas</p>
-                            </div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-icon orange">
-                                <i class="fas fa-school"></i>
-                            </div>
-                            <div class="stat-content">
-                                <h3 id="totalInstitutions">0</h3>
-                                <p>Instituições Interessadas</p>
+                                <p>Total de Eventos</p>
                             </div>
                         </div>
                         <div class="stat-card">
@@ -108,7 +90,7 @@
                             </div>
                             <div class="stat-content">
                                 <h3 id="scheduledVisits">0</h3>
-                                <p>Visitas Agendadas</p>
+                                <p>Eventos Agendados</p>
                             </div>
                         </div>
                     </div>
@@ -120,37 +102,26 @@
                     <div class="filters-section">
                         <div class="filters-header">
                             <!-- Updated filter title -->
-                            <h2 class="section-title">Filtrar Visitas</h2>
+                            <h2 class="section-title">Filtrar Eventos</h2>
                         </div>
                         <div class="filters-grid">
                             <div class="filter-group">
-                                <label for="statusFilter">Status</label>
-                                <select id="statusFilter" class="filter-select">
-                                    <option value="all">Todas</option>
-                                    <option value="active">Ativas</option>
-                                    <option value="paused">Pausadas</option>
-                                    <option value="closed">Fechadas</option>
-                                </select>
+                            <label for="statusFilter">Status</label>
+                            <select id="statusFilter" class="filter-select">
+                                <option value="all">Todos</option>
+                                <option value="Pendente">Pendente</option>
+                                <option value="Aprovada">Aprovada</option>
+                                <option value="Concluída">Concluída</option>
+                                <option value="Cancelada">Cancelada</option>
+                            </select>
                             </div>
                             <div class="filter-group">
                                 <!-- Changed from job level to visit type -->
-                                <label for="typeFilter">Tipo de Visita</label>
+                                <label for="typeFilter">Tipo de Evento</label>
                                 <select id="typeFilter" class="filter-select">
                                     <option value="all">Todos</option>
                                     <option value="tecnica">Técnica</option>
                                     <option value="palestra">Palestra</option>
-                                    <option value="workshop">Workshop</option>
-                                </select>
-                            </div>
-                            <div class="filter-group">
-                                <!-- Changed from job area to company area -->
-                                <label for="areaFilter">Área da Empresa</label>
-                                <select id="areaFilter" class="filter-select">
-                                    <option value="all">Todas</option>
-                                    <option value="tecnologia">Tecnologia</option>
-                                    <option value="industria">Indústria</option>
-                                    <option value="servicos">Serviços</option>
-                                    <option value="saude">Saúde</option>
                                 </select>
                             </div>
                             <div class="filter-group">
@@ -168,7 +139,7 @@
                     <div class="jobs-section">
                         <div class="section-header">
                             <!-- Updated section title -->
-                            <h2 class="section-title">Suas Visitas Publicadas</h2>
+                            <h2 class="section-title">Seus Eventos Publicados</h2>
                             <div class="view-toggle">
                                 <button class="view-btn active" data-view="grid">
                                     <i class="fas fa-th-large"></i>
@@ -272,7 +243,7 @@
         </div>
     </div>
 
-    <script src="/js/vagas.js"></script>
+    <script type="module" src="js/vagas.js"></script>
 </body>
 
 </html>

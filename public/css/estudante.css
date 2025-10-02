@@ -5,6 +5,10 @@
   gap: 1rem;
 }
 
+h4{
+  margin-right: 10px;
+}
+
 .calendar {
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
