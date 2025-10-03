@@ -121,6 +121,14 @@ router.get('/recupera-senha', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/recupera_senha.html'));
 });
 
+router.get('/calendario', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/estudante/calendario.html'));
+});
+
+router.get('/avaliar', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/estudante/avaliar.html'));
+});
+
 
 
 module.exports = router;
