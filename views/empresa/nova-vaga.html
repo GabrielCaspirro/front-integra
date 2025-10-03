@@ -2,15 +2,15 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Visita Técnica - Empresa - INTEGRA</title>
-    <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
-    <link rel="stylesheet" href="/css/empresa.css">
-    <link rel="stylesheet" href="/css/dashboard.css">
-    <link rel="stylesheet" href="/css/styles.css">        
-    <link rel="stylesheet" href="/css/nova-vaga.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Visita Técnica - Empresa - INTEGRA</title>
+  <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
+  <link rel="stylesheet" href="/css/empresa.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/nova-vaga.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -27,20 +27,24 @@
 
           <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
 
+          <!-- Menu de navegação principal -->
           <nav class="main-nav" id="mainNav">
             <a href="/empresa" class="nav-link">Home</a>
             <a href="/vagas" class="nav-link">Meus Eventos</a>
             <a href="/agendados" class="nav-link">Agendados</a>
             <a href="/palestrantes-empresa" class="nav-link">Meus Palestrantes</a>
 
+            <!-- User Profile -->
             <div class="user-info" id="user-profile-btn">
-              <div class="user-avatar"><i class="fas fa-user"></i></div>
-              <p>TechSolutions</p>
+              <div class="user-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <p id="empresaNome"></p>
               <i class="fas fa-chevron-down"></i>
             </div>
 
             <div class="mobile-buttons">
-              <a href="/" class="button primary-button">Sair</a>
+              <a href="/login" class="button primary-button">Sair</a>
             </div>
           </nav>
         </div>
@@ -55,7 +59,8 @@
               <i class="fas fa-industry section-icon"></i>
               Criar Visita Técnica
             </h1>
-            <p class="welcome-description">Ofereça uma oportunidade de visita técnica para estudantes das ETECs e FATECs</p>
+            <p class="welcome-description">Ofereça uma oportunidade de visita técnica para estudantes das ETECs e FATECs
+            </p>
           </div>
 
           <div class="job-creation-layout">
@@ -71,7 +76,8 @@
 
                     <div class="form-group">
                       <label for="visitTitle" class="form-label"><i class="fas fa-tag"></i> Título *</label>
-                      <input type="text" id="visitTitle" class="form-input" placeholder="Ex: Visita à Fábrica de Automação" required>
+                      <input type="text" id="visitTitle" class="form-input"
+                        placeholder="Ex: Visita à Fábrica de Automação" required>
                     </div>
 
                     <div class="form-group">
@@ -79,7 +85,7 @@
                       <select id="visitArea" class="form-input" required>
                         <option value="">Selecione o tipo</option>
                         <option value="visita_tecnica" selected>Visita Técnica</option>
-                        <option value="palestra">Palestra</option> 
+                        <option value="palestra">Palestra</option>
                       </select>
                     </div>
 
@@ -96,7 +102,8 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="visitDescription" class="form-label"><i class="fas fa-align-left"></i> Descrição *</label>
+                      <label for="visitDescription" class="form-label"><i class="fas fa-align-left"></i> Descrição
+                        *</label>
                       <textarea id="visitDescription" class="form-textarea" rows="6" required></textarea>
                     </div>
                   </div>
@@ -122,14 +129,17 @@
                     <div class="form-group">
                       <label for="valor" class="form-label"><i class="fas fa-dollar-sign"></i> Valor (R$) *</label>
                       <input type="number" id="valor" class="form-input" min="0" step="0.01" value="0" required>
-                      <small class="help-text">Se for gratuito, deixe 0 (o front envia 0.01 por limitação do backend).</small>
+                      <small class="help-text">Se for gratuito, deixe 0 (o front envia 0.01 por limitação do
+                        backend).</small>
                     </div>
                   </div>
                 </div>
 
                 <div class="form-actions">
-                  <button type="button" class="btn-secondary" id="cancelBtn"><i class="fas fa-times"></i> Cancelar</button>
-                  <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Publicar Visita Técnica</button>
+                  <button type="button" class="btn-secondary" id="cancelBtn"><i class="fas fa-times"></i>
+                    Cancelar</button>
+                  <button type="submit" class="btn-primary"><i class="fas fa-paper-plane"></i> Publicar Visita
+                    Técnica</button>
                 </div>
               </form>
             </div>
@@ -169,9 +179,8 @@
         <div class="footer-content">
           <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
           <div class="footer-links">
-            <a href="#" class="footer-link">Termos de Uso</a>
-            <a href="#" class="footer-link">Política de Privacidade</a>
-            <a href="#" class="footer-link">Suporte</a>
+            <a href="/termos-de-uso" class="footer-link">Termos de Uso</a>
+            <a href="/termos-de-privacidade" class="footer-link">Política de Privacidade</a>
           </div>
         </div>
       </div>

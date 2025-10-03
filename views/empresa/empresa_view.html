@@ -14,7 +14,6 @@
 
 <body>
     <div class="flex-col min-h-screen">
-
         <header class="sticky-header">
             <div class="container">
                 <div class="header-content">
@@ -31,7 +30,7 @@
                         <span></span>
                     </button>
 
-
+                    <!-- Menu de navegação principal -->
                     <nav class="main-nav" id="mainNav">
                         <a href="/empresa" class="nav-link">Home</a>
                         <a href="/vagas" class="nav-link">Meus Eventos</a>
@@ -48,7 +47,7 @@
                         </div>
 
                         <div class="mobile-buttons">
-                            <a href="/" class="button primary-button">Sair</a>
+                            <a href="/login" class="button primary-button">Sair</a>
                         </div>
                     </nav>
                 </div>
@@ -75,8 +74,8 @@
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon green">
-                                <i class="fas fa-calendar-check"></i>
+                            <div class="stat-icon purple">
+                                <i class="fas fa-users"></i>
                             </div>
                             <div class="stat-content">
                                 <h3>5</h3>
@@ -93,7 +92,7 @@
                             </div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon purple">
+                            <div class="stat-icon green">
                                 <i class="fas fa-clock"></i>
                             </div>
                             <div class="stat-content">
@@ -105,31 +104,33 @@
                 </div>
             </div>
 
-            <div class="section">
-                <div class="quick-actions-section">
-                    <h2 class="section-title">Ações Rápidas</h2>
-                    <div class="quick-actions-grid">
-                        <a href="/nova-vaga" class="quick-action-card">
-                            <div class="stat-icon blue">
-                                <i class="fas fa-plus-circle"></i>
-                            </div>
-                            <h3 class="espaco_card">Adicionar Evento</h3>
-                            <p>Criar nova disponibilidade de evento</p>
-                        </a>
-                        <a href="/palestrantes-empresa" class="quick-action-card">
-                            <div class="stat-icon orange">
-                                <i class="fas fa-user-check"></i>
-                            </div>
-                            <h3 class="espaco_card">Aprovar Palestrantes</h3>
-                            <p>Gerenciar solicitações de palestrantes</p>
-                        </a>
-                        <a href="/agendados" class="quick-action-card">
-                            <div class="stat-icon green">
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <h3 class="espaco_card">Ver Agendamentos</h3>
-                            <p>Visualizar eventos confirmados</p>
-                        </a>
+            <div class="section_depois">
+                <div class="container">
+                    <div class="quick-actions-section">
+                        <h2 class="section-title">Ações Rápidas</h2>
+                        <div class="quick-actions-grid">
+                            <a href="/nova-vaga" class="quick-action-card">
+                                <div class="stat-icon blue">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                                <h3 class="espaco_card">Adicionar Evento</h3>
+                                <p>Criar nova disponibilidade de evento</p>
+                            </a>
+                            <a href="/palestrantes-empresa" class="quick-action-card">
+                                <div class="stat-icon orange">
+                                    <i class="fas fa-user-check"></i>
+                                </div>
+                                <h3 class="espaco_card">Aprovar Palestrantes</h3>
+                                <p>Gerenciar solicitações de palestrantes</p>
+                            </a>
+                            <a href="/agendados" class="quick-action-card">
+                                <div class="stat-icon green">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h3 class="espaco_card">Ver Agendamentos</h3>
+                                <p>Visualizar eventos confirmados</p>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

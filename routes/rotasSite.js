@@ -26,7 +26,7 @@ router.get('/home-coordenador', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/coordenador/home.html'));
 });
 
-router.get('/agendamento-coordenador', (req, res) => {
+router.get('/agendados-coordenador', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/coordenador/agendados.html'));
 });
 

@@ -338,7 +338,12 @@ textarea {
 
 /* Seções */
 .section {
-  padding: 8rem 0;
+  padding-top: 8rem;
+  padding-bottom: 0;
+}
+
+.section_depois {
+  padding: 1rem 0;
 }
 
 .light-bg {
@@ -750,7 +755,7 @@ textarea {
   overflow: hidden;
 }
 
-.event-bar-salas{
+.event-bar-salas {
   width: 100%;
   display: flex;
   flex-direction: row;

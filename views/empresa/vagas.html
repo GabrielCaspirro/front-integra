@@ -31,6 +31,7 @@
                         <span></span>
                     </button>
 
+                    <!-- Menu de navegação principal -->
                     <nav class="main-nav" id="mainNav">
                         <a href="/empresa" class="nav-link">Home</a>
                         <a href="/vagas" class="nav-link">Meus Eventos</a>
@@ -42,7 +43,7 @@
                             <div class="user-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
-                            <p>TechSolutions</p>
+                            <p id="empresaNome"></p>
                             <i class="fas fa-chevron-down"></i>
                         </div>
 
@@ -60,10 +61,9 @@
                     <div class="page-header">
                         <div class="page-title-section">
                             <!-- Updated title and description for technical visits -->
-                            <h1 class="page-title">
-                                <i class="fas fa-building page-icon"></i>
+                            <h2 class="page-title">
                                 Minhas Visitas Técnicas
-                            </h1>
+                            </h2>
                         </div>
                         <div class="page-actions">
                             <a href="/nova-vaga" class="btn-primary">
@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="section">
+            <div class="section_depois">
                 <div class="container">
                     <div class="filters-section">
                         <div class="filters-header">
@@ -106,14 +106,14 @@
                         </div>
                         <div class="filters-grid">
                             <div class="filter-group">
-                            <label for="statusFilter">Status</label>
-                            <select id="statusFilter" class="filter-select">
-                                <option value="all">Todos</option>
-                                <option value="Pendente">Pendente</option>
-                                <option value="Aprovada">Aprovada</option>
-                                <option value="Concluída">Concluída</option>
-                                <option value="Cancelada">Cancelada</option>
-                            </select>
+                                <label for="statusFilter">Status</label>
+                                <select id="statusFilter" class="filter-select">
+                                    <option value="all">Todos</option>
+                                    <option value="Pendente">Pendente</option>
+                                    <option value="Aprovada">Aprovada</option>
+                                    <option value="Concluída">Concluída</option>
+                                    <option value="Cancelada">Cancelada</option>
+                                </select>
                             </div>
                             <div class="filter-group">
                                 <!-- Changed from job level to visit type -->
@@ -127,14 +127,15 @@
                             <div class="filter-group">
                                 <label for="searchFilter">Buscar</label>
                                 <!-- Updated placeholder text -->
-                                <input type="text" id="searchFilter" class="filter-input" placeholder="Título da visita...">
+                                <input type="text" id="searchFilter" class="filter-input"
+                                    placeholder="Título da visita...">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="section">
+            <div class="section_depois">
                 <div class="container">
                     <div class="jobs-section">
                         <div class="section-header">
@@ -149,7 +150,7 @@
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div class="jobs-grid" id="visitsGrid">
                             <!-- Visits will be populated by JavaScript -->
                         </div>
@@ -164,7 +165,8 @@
                             </div>
                             <!-- Updated empty state text for visits -->
                             <h3>Nenhuma visita encontrada</h3>
-                            <p>Você ainda não publicou nenhuma visita técnica ou nenhuma visita corresponde aos filtros aplicados.</p>
+                            <p>Você ainda não publicou nenhuma visita técnica ou nenhuma visita corresponde aos filtros
+                                aplicados.</p>
                             <a href="/nova-visita" class="btn-primary">
                                 <i class="fas fa-plus"></i>
                                 Criar Primeira Visita
@@ -180,9 +182,8 @@
                 <div class="footer-content">
                     <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
                     <div class="footer-links">
-                        <a href="#" class="footer-link">Termos de Uso</a>
-                        <a href="#" class="footer-link">Política de Privacidade</a>
-                        <a href="#" class="footer-link">Suporte</a>
+                        <a href="/termos-de-uso" class="footer-link">Termos de Uso</a>
+                        <a href="/termos-de-privacidade" class="footer-link">Política de Privacidade</a>
                     </div>
                 </div>
             </div>
