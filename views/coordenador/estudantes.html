@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudantes - Coordenador - INTEGRA</title>
+    <link rel="icon" href="/img/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/coordenador.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="flex-col min-h-screen">
+        <!-- Header -->
+        <header class="sticky-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="index.html" class="logo-link">
+                            <img src="/img/logo.png" alt="Logo INTEGRA" class="logo-image">
+                        </a>
+                    </div>
+
+                    <!-- Botão de menu hamburguer -->
+                    <button class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <!-- Menu de navegação principal -->
+                    <nav class="main-nav" id="mainNav">
+                        <a href="/home-coordenador" class="nav-link">Home</a>
+                        <a href="/agendamento-coordenador" class="nav-link">Agendamento</a>
+                        <a href="/agendados-coordenador" class="nav-link">Agendados</a>
+                        <a href="/estudantes-coordenador" class="nav-link">Estudantes</a>
+
+                        <!-- User Profile -->
+                        <div class="user-info" id="user-profile-btn">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <p>Prof. João</p>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+
+                        <div class="mobile-buttons">
+                            <a href="/coordenador" class="button primary-button">Sair</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="section primeiro">
+                <div class="container">
+                    <div class="page-header">
+                        <h1 class="page-title">Gerenciamento de Estudantes</h1>
+                        <p class="page-description">Organize os estudantes por turmas e cursos</p>
+                    </div>
+
+                    <!-- Filtro de Turmas -->
+                    <div class="classes-filters">
+                        <input type="text" id="turma-search" placeholder="Pesquisar turma...">
+                        <select id="turma-filter-field">
+                            <option value="all">Todos</option>
+                            <option value="serie">Série</option>
+                            <option value="letra">Letra</option>
+                            <option value="curso">Curso</option>
+                            <option value="turno">Turno</option>
+                        </select>
+                    </div>
+
+                    <!-- Classes Grid -->
+                    <div class="classes-grid" id="classes-grid">
+                        <!-- Classes will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Students List Modal -->
+        <div class="modal" id="students-modal">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="students-modal-title">Alunos da Turma</h3>
+                    <p class="modal-description" id="students-modal-description">Lista de estudantes</p>
+                </div>
+
+                <div class="modal-body">
+                    <div class="students-filters">
+                        <input type="text" id="student-search" placeholder="Pesquisar aluno..." />
+                        <select id="student-filter">
+                            <option value="all">Todos</option>
+                            <option value="nome">Nome</option>
+                            <option value="rm">RM</option>
+                            <option value="email">Email</option>
+                        </select>
+                    </div>
+
+                    <div class="students-table-container">
+                        <table class="data-table" id="students-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>RM</th>
+                                    <th>Email</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="students-list">
+                                <!-- Students will be populated -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="add-student-btn" class="button primary-button">
+                        <i class="fas fa-plus"></i> Adicionar Aluno
+                    </button>
+                    <button id="close-students-modal" class="button outline-button">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add/Edit Student Modal -->
+        <div class="modal" id="student-form-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="student-form-title">Adicionar Aluno</h3>
+                </div>
+                <div class="modal-body">
+                    <form id="student-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="student-name">Nome Completo</label>
+                                <input type="text" id="student-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="student-rm">RM</label>
+                                <input type="text" id="student-rm" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="student-email">Email</label>
+                            <input type="email" id="student-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="student-password">Senha Temporária</label>
+                            <input type="password" id="student-password" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="save-student-btn" class="button primary-button">
+                        <i class="fas fa-save"></i> Salvar
+                    </button>
+                    <button id="close-student-form-modal" class="button outline-button">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
+                    <div class="footer-links">
+                        <a href="/termos-de-uso" class="footer-link">Termos de Uso</a>
+                        <a href="/termos-de-privacidade" class="footer-link">Política de Privacidade</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="/js/coordenador-estudantes.js"></script>
+</body>
+
+</html>

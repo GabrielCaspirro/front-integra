@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Coordenador - INTEGRA</title>
+    <link rel="icon" href="img/favicon.png" type="image/png" sizes="32x32" />
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/coordenador.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="flex-col min-h-screen">
+        <!-- Header -->
+        <header class="sticky-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="/home-coordenador" class="logo-link">
+                            <img src="/img/logo.png" alt="Logo INTEGRA" class="logo-image">
+                        </a>
+                    </div>
+
+                    <!-- Botão de menu hamburguer -->
+                    <button class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <!-- Menu de navegação principal -->
+                    <nav class="main-nav" id="mainNav">
+                        <a href="/home-coordenador" class="nav-link">Home</a>
+                        <a href="/agendamento-coordenador" class="nav-link">Agendamento</a>
+                        <a href="/agendados-coordenador" class="nav-link">Agendados</a>
+                        <a href="/estudantes-coordenador" class="nav-link">Estudantes</a>
+
+                        <!-- User Profile -->
+                        <div class="user-info" id="user-profile-btn">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <p>Prof. João</p>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+
+                        <div class="mobile-buttons">
+                            <a href="/coordenador" class="button primary-button">Sair</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="section primeiro">
+                <div class="container">
+                    <!-- Welcome Message -->
+                    <div class="welcome-section">
+                        <h1 class="welcome-title">Bem-vindo(a), Prof. João Silva!</h1>
+                        <p class="welcome-description">Gerencie suas atividades acadêmicas e eventos da ETEC</p>
+                    </div>
+
+                    <!-- Dashboard Stats -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon orange">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>5</h3>
+                                <p>Eventos Agendados</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon purple">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3>156</h3>
+                                <p>Estudantes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="section">
+                <div class="container">
+                    <div class="quick-actions-section">
+                        <h2 class="section-title">Ações Rápidas</h2>
+                        <div class="quick-actions-grid">
+                            <a href="agendamento.html" class="quick-action-card">
+                                <div class="stat-icon green">
+                                    <i class="fas fa-calendar-plus"></i>
+                                </div>
+                                <h3 class="espaco_card">Agendar Evento</h3>
+                                <p>Criar nova palestra ou visita técnica</p>
+                            </a>
+                            <a href="agendados.html" class="quick-action-card">
+                                <div class="stat-icon orange">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <h3 class="espaco_card">Ver Agendados</h3>
+                                <p>Visualizar eventos programados</p>
+                            </a>
+                            <a href="estudantes.html" class="quick-action-card">
+                                <div class="stat-icon purple">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <h3 class="espaco_card">Adicionar Aluno</h3>
+                                <p>Cadastrar novo estudante</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="calendar-card">
+                    <div class="card-content">
+                        <h2 class="section-title">Calendário de Eventos</h2>
+                        <div class="calendar-container">
+                            <div class="calendar" id="calendar">
+                                <!-- Calendar gerado via JavaScript -->
+                            </div>
+                            <div class="selected-day-events">
+                                <h3 class="selected-date" id="selected-date">Selecione uma data</h3>
+                                <div id="events-container" class="events-container">
+                                    <div class="event-item" style="display: none;">
+                                        <div class="event-time event-bar">
+                                            <div class="event-info">Hora:</div>
+                                            <span class="time event-preenchido"></span>
+                                            <div class="event-info">Até:</div>
+                                            <span class="time_end event-preenchido-calendario"></span>
+                                            <div class="event-info">Tipo:</div>
+                                            <span class="tipo event-preenchido-tipo"></span>
+                                        </div>
+                                        <div class="pula-linha"></div>
+                                        <div class="event-nome event-bar-calendario">
+                                            <div class="event-info">Título:</div>
+                                            <span class="nome event-preenchido-calendario-title"></span>
+                                        </div>
+                                        <div class="pula-linha"></div>
+                                        <div class="event-info event-bar-descricao">Descrição</div>
+                                        <div class="event-descricao"><span
+                                                class="descricao event-preenchido-descricao"></span>
+                                        </div>
+                                        <div class="pula-linha"></div>
+                                        <div class="event-info event-bar-salas">Salas</div>
+                                        <div class="event-salas">
+                                            <span class="salas event-preenchido-salas"></span>
+                                        </div>
+                                        <div class="pula-linha-botao"></div>
+                                        <div class="card-footer">
+                                            <a href="agendados.html" class="button primary-button full-width">Ver
+                                                Mais
+                                                Informações
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
+                    <div class="footer-links">
+                        <a href="/termos-de-uso" class="footer-link">Termos de Uso</a>
+                        <a href="/termos-de-privacidade" class="footer-link">Política de Privacidade</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/coordenador.js"></script>
+</body>
+
+</html>

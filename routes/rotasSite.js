@@ -6,12 +6,36 @@ router.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
+router.get('/termos-de-uso', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/termos/termos-de-uso.html'));
+});
+
+router.get('/termos-de-privacidade', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/termos/termos-de-privacidade.html'));
+});
+
 router.get('/administrador', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/administrador/administrador_view.html'));
 });
 
 router.get('/coordenador', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/coordenador/coordenador_view.html'));
+});
+
+router.get('/home-coordenador', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/coordenador/home.html'));
+});
+
+router.get('/agendamento-coordenador', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/coordenador/agendados.html'));
+});
+
+router.get('/agendamento-coordenador', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/coordenador/agendamento.html'));
+});
+
+router.get('/estudantes-coordenador', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/coordenador/estudantes.html'));
 });
 
 router.get('/empresa', (req, res) => {

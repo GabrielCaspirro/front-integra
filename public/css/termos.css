@@ -1,0 +1,235 @@
+/* termos.css */
+
+/* Layout geral da página */
+.termos-wrapper {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Cada seção vira um card */
+.termos-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.termos-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Ícones no topo do card */
+.termos-card .icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+/* Títulos principais (1.1, 1.2 etc.) */
+.termos-card h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Subtítulos (Do Usuário, Do Integra, etc.) */
+.termos-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Texto */
+.termos-card p {
+    margin-bottom: 1rem;
+    text-align: justify;
+    color: var(--text-dark);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Listas */
+.termos-card ul {
+    margin: 0.5rem 0 1.25rem 1.5rem;
+    padding-left: 1rem;
+    list-style-type: disc;
+}
+
+.termos-card ul li {
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+/* Destaques */
+.termos-card strong {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 17px;
+}
+
+/* ==================== SEÇÕES ESPECÍFICAS ==================== */
+
+/* Grid de definições */
+.grid-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.def-item {
+    background: #f8f9fb;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Info-blocks (exemplo cadastro) */
+.info-block {
+    background: #f8f9fb;
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.info-block p {
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+}
+
+/* Responsabilidades - grid */
+.grid-columns {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1rem;
+}
+
+.resp-card {
+    background: #f9f9f9;
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    border: 1px solid #e0e0e0;
+}
+
+.resp-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--secondary-color);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.resp-card ul {
+    margin-left: 1.2rem;
+    list-style: disc;
+}
+
+.resp-card li {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+}
+
+/* ==================== LEIS ==================== */
+.leis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.lei-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.lei-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.lei-card .icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.lei-card h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.3rem;
+}
+
+.lei-card .lei-info {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #000000;
+    margin-bottom: 0.8rem;
+}
+
+.lei-card p {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.lei-card a {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--primary-color);
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+/* ==================== RESPONSIVIDADE ==================== */
+@media (max-width: 768px) {
+    .termos-card {
+        padding: 1.2rem;
+    }
+
+    .termos-card h2 {
+        font-size: 1.1rem;
+    }
+
+    .termos-card h3 {
+        font-size: 0.95rem;
+    }
+
+    .grid-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-list {
+        grid-template-columns: 1fr;
+    }
+}

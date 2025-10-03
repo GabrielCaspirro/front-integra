@@ -30,6 +30,13 @@ body {
     text-align: center;
 }
 
+.dashboard-main {
+  flex: 1;
+  padding: 2rem 0;
+  background-color: #f0e6f6;
+  background-image: linear-gradient(to bottom, #f8f5fb, #f0e6f6);
+}
+
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 40%));
@@ -111,7 +118,7 @@ html {
 .testimonial-section,
 .faq-section,
 .cta-section {
-    padding: 4rem 0;
+    padding: 2rem 0;
     text-align: center;
 }
 

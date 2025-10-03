@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamentos - INTEGRA</title>
+    <link rel="icon" type="image/png" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/planos.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/coordenador.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Modal Básico */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            border-left: 2px solid var(--primary-color);
+            text-align: center;
+        }
+
+        .close-modal,
+        .close-resumo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 0.1rem 0.5rem;
+            border-radius: var(--radius);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Calendário */
+        .calendar-header {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .calendar-weekdays,
+        .calendar-body {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .calendar-weekdays div,
+        .calendar-body div {
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .calendar-day-available {
+            background-color: #dddbe8;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 2px;
+        }
+
+        .calendar-day-available:hover {
+            background-color: #4a2358;
+            color: #fff;
+        }
+
+        .calendar-day-unavailable {
+            background-color: #ccc;
+            color: #666;
+            border-radius: 5px;
+            margin: 2px;
+        }
+
+        .calendar-day-empty {
+            background: transparent;
+        }
+
+        /* Grid de horários e salas */
+        .hours-grid,
+        .rooms-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        .hours-grid button,
+        .rooms-grid button {
+            padding: 0.5rem 1rem;
+            margin: 0.2rem;
+            cursor: pointer;
+            background: #dddbe8;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+        }
+
+        .hours-grid button:hover,
+        .rooms-grid button:hover {
+            background: #4a2358;
+            color: #fff;
+        }
+
+        .room-btn.selected {
+            background: #4a2358;
+            color: #fff;
+        }
+
+        /* Resumo */
+        .resumo-list {
+            text-align: left;
+            margin-top: 1rem;
+        }
+
+        .resumo-list p {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-col min-h-screen">
+
+        <!-- Header -->
+        <header class="sticky-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="home.html" class="logo-link">
+                            <img src="/img/logo.png" alt="Logo INTEGRA" class="logo-image">
+                        </a>
+                    </div>
+                    <button class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    
+                    <!-- Menu de navegação principal -->
+                    <nav class="main-nav" id="mainNav">
+                        <a href="/home-coordenador" class="nav-link">Home</a>
+                        <a href="/agendamento-coordenador" class="nav-link">Agendamento</a>
+                        <a href="/agendados-coordenador" class="nav-link">Agendados</a>
+                        <a href="/estudantes-coordenador" class="nav-link">Estudantes</a>
+
+                        <!-- User Profile -->
+                        <div class="user-info" id="user-profile-btn">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <p>Prof. João</p>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+
+                        <div class="mobile-buttons">
+                            <a href="/coordenador" class="button primary-button">Sair</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main -->
+        <main class="dashboard-main">
+            <div class="section">
+                <div class="container">
+                    <div class="welcome-section">
+                        <h1 class="welcome-title">Agende Seus Eventos</h1>
+                        <p class="welcome-description">Visualize e agende Palestras, Workshops e Visitas Técnicas</p>
+                    </div>
+                </div>
+            </div>
+
+            <section id="cadastre" class="cta-section animate-on-scroll">
+                <div class="container">
+                    <h2>Precisando de um Evento na sua ETEC?</h2>
+                    <button onclick="location.href='criar-evento.html'" class="button secundary-button">Criar
+                        Evento</button>
+                </div>
+            </section>
+
+            <!-- Seção de Agendar Eventos -->
+            <div class="section agendar-events-section">
+                <div class="container">
+                    <h2 class="agendar-title">Agendar Eventos</h2>
+                    <div class="agendar-events-grid" id="agendar-events-container">
+                        <!-- Card modelo -->
+                        <div class="agendar-event-card" style="display: none;">
+                            <h3 class="agendar-event-title">Título do Evento</h3>
+                            <p class="agendar-event-description">Descrição resumida do evento.</p>
+                            <div class="agendar-event-details texto">
+                                <span class="label empresa-label">Empresa</span>
+                                <span class="value empresa-value"></span>
+                            </div>
+                            <div class="agendar-event-details texto">
+                                <span class="label tipo-label">Tipo</span>
+                                <span class="value tipo-value"></span>
+                            </div>
+                            <div class="agendar-event-details texto">
+                                <span class="label rua-label">Rua</span>
+                                <span class="value rua-value"></span>
+                            </div>
+                            <div class="agendar-event-details texto">
+                                <span class="label bairro-label">Bairro</span>
+                                <span class="value bairro-value"></span>
+                                <span class="label numero-label">N°</span>
+                                <span class="value numero-value"></span>
+                            </div>
+                            <div class="agendar-event-details texto">
+                                <span class="label cidade-label">Cidade</span>
+                                <span class="value cidade-value"></span>
+                                <span class="label cep-label">CEP</span>
+                                <span class="value cep-value"></span>
+                            </div>
+                            <div class="agendar-event-details">
+                                <span class="label valor-label">Valor</span>
+                                <span class="value valor-value"></span>
+                                <span class="label vagas-label">Vagas</span>
+                                <span class="value vagas-value"></span>
+                            </div>
+                            <button class="agendar-event-btn secundary-button">Agendar Evento</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal de Agendamento -->
+        <div id="agendar-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="modal-body">
+                    <h2 id="modal-event-title">Agendar Evento</h2>
+
+                    <!-- Etapa 1: Selecionar Dia -->
+                    <div id="step-days" class="modal-step">
+                        <p>Escolha um dia disponível</p>
+                        <div class="pula-linha"></div>
+                        <div id="available-days" class="days-grid"></div>
+                    </div>
+
+                    <!-- Etapa 2: Selecionar Horário -->
+                    <div id="step-hours" class="modal-step" style="display:none;">
+                        <p>Escolha o horário disponível</p>
+                        <div class="pula-linha"></div>
+                        <div id="available-hours" class="hours-grid"></div>
+                    </div>
+
+                    <!-- Etapa 3: Selecionar Turmas -->
+                    <div id="step-rooms" class="modal-step" style="display:none;">
+                        <h3>Escolha as turmas</h3>
+                        <div id="available-rooms" class="rooms-grid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Resumo -->
+        <div id="resumo-modal" class="modal">
+            <div class="modal-content" style="max-width: 550px;">
+                <span class="close-resumo">&times;</span>
+                <div class="modal-body">
+                    <h2>Resumo do Agendamento</h2>
+                    <div class="resumo-card" style="
+                background: #f5f5f5;
+                padding: 1rem;
+                border-radius: 10px;
+                width: 100%;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                margin-top: 1rem;
+                text-align: left;
+            ">
+                        <p><strong>Título:</strong> <span id="resumo-titulo"></span></p>
+                        <p><strong>Data:</strong> <span id="resumo-data"></span></p>
+                        <p><strong>Hora:</strong> <span id="resumo-hora"></span></p>
+                        <p><strong>Turmas:</strong> <span id="resumo-turmas"></span></p>
+                    </div>
+                    <button class="button primary-button" style="margin-top: 1rem;"
+                        onclick="document.getElementById('resumo-modal').style.display='none'">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="dashboard-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
+                    <div class="footer-links">
+                        <a href="/termos-de-uso" class="footer-link">Termos de Uso</a>
+                        <a href="/termos-de-privacidade" class="footer-link">Política de Privacidade</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="/js/coordenador-estudantes.js"></script>
+        <script src="/js/coordenador-agendamento.js"></script>
+    </div>
+</body>
+
+</html>
