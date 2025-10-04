@@ -36,14 +36,25 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (resultado) {
+        // Mensagem de sucesso principal
         mensagem.innerText = "Cadastro realizado com sucesso!";
         mensagem.style.color = "green";
-        setTimeout(() => (window.location.href = "/login-instituicao"), 2000);
+
+        // Mostra alerta informativo após o sucesso
+        setTimeout(() => {
+          alert("SUA SENHA TEMPORÁRIA VAI SER ENVIADA PARA O SEU EMAIL");
+        }, 500);
+
+        // Redireciona após 3 segundos
+        setTimeout(() => {
+          window.location.href = "/login-instituicao";
+        }, 3000);
       } else {
         mensagem.innerText = resultado.erro || "Erro ao cadastrar";
         mensagem.style.color = "red";
       }
     } catch (erro) {
+      console.error("Erro de conexão:", erro);
       mensagem.innerText = "Erro de conexão com o servidor";
       mensagem.style.color = "red";
     }

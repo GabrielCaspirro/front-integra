@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard do Coordenador - INTEGRA</title>
+  <title>Escolha de Instituição</title>
+  <link rel="icon" href="img/favicon.png" type="image/png" sizes="32x32" />
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/dashboard.css">
   <link rel="stylesheet" href="/css/coordenador.css">
@@ -80,12 +81,6 @@
                 </div>
             </div>
 
-            <div class="add-etec-section">
-                <button class="add-etec-button button primary-button" onclick="addNewEtec()">
-                    <i class="fas fa-plus-circle"></i>
-                    Adicionar Nova Instituição
-                </button>
-            </div>
         </main>
     </div>
 
@@ -188,18 +183,6 @@
             setTimeout(() => {
                 window.location.href = url;
             }, 800);
-        }
-
-        // ---------- ADICIONAR NOVA ETEC ----------
-        function addNewEtec() {
-            alert(
-                'Funcionalidade em desenvolvimento!\n\n' +
-                'Em breve você poderá:\n' +
-                '• Cadastrar novas ETECs\n' +
-                '• Definir coordenadores\n' +
-                '• Configurar permissões\n\n' +
-                'Entre em contato com o administrador do sistema.'
-            );
         }
 
         // ---------- INICIALIZAÇÃO ----------

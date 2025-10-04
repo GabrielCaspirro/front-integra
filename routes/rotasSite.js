@@ -38,6 +38,10 @@ router.get('/estudantes-coordenador', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/coordenador/estudantes.html'));
 });
 
+router.get('/criar-evento', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/coordenador/criar-evento.html'));
+});
+
 router.get('/empresa', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/empresa/empresa_view.html'));
 });
@@ -64,6 +68,14 @@ router.get('/estudante', (req, res) => {
 
 router.get('/instituicao', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/instituicao/instituicao_view.html'));
+});
+
+router.get('/gerenciamento', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/instituicao/gerenciamento.html'));
+});
+
+router.get('/eventos', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/instituicao/eventos.html'));
 });
 
 router.get('/palestrante', (req, res) => {

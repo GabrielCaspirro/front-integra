@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const availableHoursContainer = document.getElementById("available-hours");
     const availableRoomsContainer = document.getElementById("available-rooms");
     const modalTitle = document.getElementById("modal-event-title");
+    const confirmarTurmasBtn = document.getElementById("confirmar-turmas");
 
     const resumoModal = document.getElementById("resumo-modal");
     const closeResumo = resumoModal.querySelector(".close-resumo");
@@ -31,9 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
             vacancies: 20,
             availableDays: ["2025-10-10", "2025-10-11", "2025-10-12"],
             availableHoursPerDay: {
-                "2025-10-10": ["08:00-10:00", "10:00-12:00"],
-                "2025-10-11": ["08:00-10:00", "10:00-12:00", "14:00-16:00"],
-                "2025-10-12": ["08:00-10:00", "10:00-12:00"]
+                "2025-10-10": ["08:00 - 10:00", "10:00 - 12:00"],
+                "2025-10-11": ["08:00 - 10:00", "10:00 - 12:00", "14:00 - 16:00"],
+                "2025-10-12": ["08:00 - 10:00", "10:00 - 12:00"]
             },
             availableRooms: ["1°A", "2°A", "2°B", "3°B", "1°C", "2°C", "3°C", "1°F", "2°F", "1°I", "3°I"]
         },
@@ -81,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         availableDaysContainer.innerHTML = "";
         availableHoursContainer.innerHTML = "";
         availableRoomsContainer.innerHTML = "";
+        confirmarTurmasBtn.style.display = "none";
     }
 
     // Popular cards de eventos
@@ -196,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Mostrar turmas disponíveis + botão Confirmar
+    // Mostrar turmas disponíveis
     function showRooms() {
         availableRoomsContainer.innerHTML = "";
         const selectedRoomsSet = new Set();
@@ -213,25 +215,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     selectedRoomsSet.add(room);
                     btn.classList.add("selected");
                 }
+                confirmarTurmasBtn.style.display = selectedRoomsSet.size > 0 ? "block" : "none";
             });
             availableRoomsContainer.appendChild(btn);
         });
 
-        // Adiciona quebra de linha antes do botão
-        const br = document.createElement("br");
-        availableRoomsContainer.appendChild(br);
-
-        // Botão Confirmar
-        const confirmBtn = document.createElement("button");
-        confirmBtn.textContent = "Confirmar Turmas";
-        confirmBtn.classList.add("primary-button");
-        confirmBtn.style.display = "block";
-        confirmBtn.style.margin = "1rem auto 0"; // centralizado e espaçamento
-        confirmBtn.addEventListener("click", () => {
+        // Botão Confirmar Turmas
+        confirmarTurmasBtn.onclick = () => {
             if (selectedRoomsSet.size === 0) {
                 alert("Selecione pelo menos uma turma!");
                 return;
             }
+
             selectedRooms = Array.from(selectedRoomsSet);
 
             agendamentos.push({
@@ -243,11 +238,9 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem(STORAGE_KEY, JSON.stringify(agendamentos));
 
             modal.style.display = "none";
-            openResumoModal(); // abrir resumo antes do reset
+            openResumoModal();
             resetModal();
-        });
-
-        availableRoomsContainer.appendChild(confirmBtn);
+        };
     }
 
     // Abrir modal resumo

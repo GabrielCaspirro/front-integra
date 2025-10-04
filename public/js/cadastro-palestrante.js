@@ -31,16 +31,26 @@ document.addEventListener("DOMContentLoaded", () => {
         email,
         telefone,
       });
+      
+    if (resultado) {
+      mensagem.innerText = "Cadastro realizado com sucesso!";
+      mensagem.style.color = "green";
 
-      if (resultado) {
-        mensagem.innerText = "Cadastro realizado com sucesso!";
-        mensagem.style.color = "green";
-        setTimeout(() => window.location.href = "/login-palestrante", 2000);
-      } else {
+      // Mostra popup estilizado
+      const popup = document.getElementById("popup");
+      popup.style.display = "block";
+
+      setTimeout(() => {
+        popup.style.display = "none";
+        // Redireciona após desaparecer
+        window.location.href = "/login-palestrante";
+      },15000);
+    }else {
         mensagem.innerText = resultado.erro || "Erro ao cadastrar";
         mensagem.style.color = "red";
       }
     } catch (erro) {
+      console.error("Erro de conexão:", erro);
       mensagem.innerText = "Erro de conexão com o servidor";
       mensagem.style.color = "red";
     }

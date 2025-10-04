@@ -26,16 +26,25 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("RESULTADO API:", resultado);
 
       if (resultado && resultado.mensagem) {
+        // Mostra mensagem de sucesso
         mensagem.innerText = resultado.mensagem;
         mensagem.style.color = "green";
 
+        // Mostra mensagem adicional
+        setTimeout(() => {
+          alert("A SENHA TEMPORÁRIA IRÁ SER ENVIADA PARA O SEU EMAIL DE CADASTRO");
+        }, 500); // aparece meio segundo depois
+
+        // Redireciona após alguns segundos
         setTimeout(() => {
           window.location.href = "/login-empresa";
-        }, 2000);
-      } else if (resultado && resultado.erro) {
+        }, 3000); // 3 segundos depois do sucesso
+      } 
+      else if (resultado && resultado.erro) {
         mensagem.innerText = resultado.erro;
         mensagem.style.color = "red";
-      } else {
+      } 
+      else {
         mensagem.innerText = "Erro desconhecido ao cadastrar.";
         mensagem.style.color = "red";
       }

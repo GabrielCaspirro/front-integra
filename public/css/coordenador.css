@@ -2520,8 +2520,9 @@ header:hover {
 
 .agendar-event-details {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   margin-bottom: 0.5rem;
+  gap: 0;
 }
 
 /* Label (campo) */
@@ -2529,31 +2530,22 @@ header:hover {
   background: var(--primary-color);
   color: #fff;
   font-weight: 600;
-  padding: 0.4rem 0.5rem 0.4rem 0.5rem;
-  /* sem espaçamento extra à direita */
+  padding: 0.4rem 0.5rem;
   border-radius: 8px 0 0 8px;
   font-size: 0.85rem;
   text-align: center;
   flex-shrink: 0;
   margin: 0;
-  /* remove qualquer espaço externo */
 }
 
 /* Valor (conteúdo) */
 .agendar-event-details .value {
   background: #f2e9f7;
-  padding: 0.4rem 0.5rem 0.4rem 0.5rem;
-  /* sem espaçamento extra à esquerda */
+  padding: 0.4rem 0.5rem;
   border-radius: 0 8px 8px 0;
   font-size: 0.85rem;
   flex: 1;
   margin: 0;
-  /* remove qualquer espaço externo */
-}
-
-.agendar-event-details .value {
-  margin-left: -2px;
-  /* força colar no label */
 }
 
 /* Botão */

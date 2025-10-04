@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliar Eventos - Dashboard do Estudante</title>
+    <title>Avaliar Eventos</title>
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/dashboard.css">
@@ -13,119 +13,130 @@
 </head>
 
 <body>
-    <header class="sticky-header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="/estudante" class="logo-link">
-                        <img src="img/logo.png" alt="Logo INTEGRA" class="logo-image">
-                    </a>
-                </div>
-
-                <button class="hamburger" id="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-
-                <nav class="main-nav" id="mainNav">
-                    <a href="/estudante" class="nav-link">Home</a>
-                    <a href="/calendario" class="nav-link">Calendário</a>
-                    <a href="/avaliar" class="nav-link">Avaliar</a>
-
-                    <div class="user-info" id="user-profile-btn">
-                        <div class="user-avatar"><i class="fas fa-user"></i></div>
-                        <p>Maria</p>
-                        <i class="fas fa-chevron-down"></i>
+    <div class="flex-col min-h-screen">
+        <header class="sticky-header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="/estudante" class="logo-link">
+                            <img src="img/logo.png" alt="Logo INTEGRA" class="logo-image">
+                        </a>
                     </div>
 
-                    <div class="mobile-buttons">
-                        <a href="/login" class="button primary-button">Sair</a>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
+                    <button class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
 
-    <main class="dashboard-main">
-        <div class="welcome-section primeiro">
-            <h1 class="welcome-title">Avalie seus Eventos</h1>
-            <p class="welcome-description">Aqui você pode avaliar eventos passados ou acompanhar os próximos
-                eventos.
-            </p>
-        </div>
-        <div class="container">
-            <!-- Eventos Passados -->
-            <section class="section-avaliar">
-                <h2>Eventos Passados</h2>
-                <div id="past-events" class="cards-grid">
-                    <!-- Template invisível -->
-                    <div class="event-card past-event-card template" data-id="">
-                        <div class="card-name"></div>
-                        <div class="card-type"></div>
-                        <p class="card-description"></p>
-                        <p class="card-date-time"></p>
+                    <nav class="main-nav" id="mainNav">
+                        <a href="/estudante" class="nav-link">Home</a>
+                        <a href="/calendario" class="nav-link">Calendário</a>
+                        <a href="/avaliar" class="nav-link">Avaliar</a>
 
-                        <!-- Estrelas para avaliação -->
-                        <div class="rating-stars">
-                            <i class="fas fa-star" data-value="1"></i>
-                            <i class="fas fa-star" data-value="2"></i>
-                            <i class="fas fa-star" data-value="3"></i>
-                            <i class="fas fa-star" data-value="4"></i>
-                            <i class="fas fa-star" data-value="5"></i>
+                        <div class="user-info" id="user-profile-btn">
+                            <div class="user-avatar"><i class="fas fa-user"></i></div>
+                            <p>Maria</p>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
 
-                        <button class="submit-rating">Avaliar</button>
+                        <div class="mobile-buttons">
+                            <a href="/login" class="button primary-button">Sair</a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+
+        <main class="dashboard-main">
+            <div class="section">
+                <div class="container">
+                    <div class="welcome-section primeiro">
+                        <h1 class="welcome-title">Avalie seus Eventos</h1>
+                        <p class="welcome-description">Aqui você pode avaliar eventos passados ou acompanhar os próximos
+                            eventos.
+                        </p>
                     </div>
                 </div>
-            </section>
+            </div>
+            <div class="container">
+                <!-- Eventos Passados -->
+                <section class="section-avaliar">
+                    <h2>Eventos Passados</h2>
+                    <div id="past-events" class="cards-grid">
+                        <!-- Template invisível -->
+                        <div class="event-card past-event-card template" data-id="">
+                            <div class="card-name"></div>
+                            <div class="card-type"></div>
+                            <p class="card-description"></p>
+                            <p class="card-date-time"></p>
 
-            <!-- Próximos Eventos -->
-            <section class="section-avaliar">
-                <h2>Próximos Eventos</h2>
-                <div id="future-events" class="cards-grid">
-                    <div class="event-card future-event-card template" data-id="">
-                        <div class="card-name"></div>
-                        <div class="card-type"></div>
-                        <p class="card-description"></p>
-                        <div class="card-countdown"></div>
-                    </div>
-                </div>
-            </section>
+                            <!-- Estrelas para avaliação -->
+                            <div class="rating-stars">
+                                <i class="fas fa-star" data-value="1"></i>
+                                <i class="fas fa-star" data-value="2"></i>
+                                <i class="fas fa-star" data-value="3"></i>
+                                <i class="fas fa-star" data-value="4"></i>
+                                <i class="fas fa-star" data-value="5"></i>
+                            </div>
 
-            <!-- Notas Anteriores -->
-            <section class="section-avaliar">
-                <h2>Notas Anteriores</h2>
-                <div id="previous-ratings" class="cards-grid">
-                    <!-- Cards avaliados aparecerão aqui via JS -->
-                    <!-- Template invisível -->
-                    <div class="event-card previous-rating-card template" data-id="">
-                        <div class="card-name"></div>
-                        <div class="card-type"></div>
-                        <p class="card-description"></p>
-                        <p class="card-date-time"></p>
-
-                        <!-- Estrelas para avaliação -->
-                        <div class="rating-stars">
-                            <i class="fas fa-star" data-value="1"></i>
-                            <i class="fas fa-star" data-value="2"></i>
-                            <i class="fas fa-star" data-value="3"></i>
-                            <i class="fas fa-star" data-value="4"></i>
-                            <i class="fas fa-star" data-value="5"></i>
+                            <button class="submit-rating">Avaliar</button>
                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
-    </main>
+                </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2025 INTEGRA. Todos os direitos reservados.</p>
+                <!-- Próximos Eventos -->
+                <section class="section-avaliar">
+                    <h2>Próximos Eventos</h2>
+                    <div id="future-events" class="cards-grid">
+                        <div class="event-card future-event-card template" data-id="">
+                            <div class="card-name"></div>
+                            <div class="card-type"></div>
+                            <p class="card-description"></p>
+                            <div class="card-countdown"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Notas Anteriores -->
+                <section class="section-avaliar">
+                    <h2>Notas Anteriores</h2>
+                    <div id="previous-ratings" class="cards-grid">
+                        <!-- Cards avaliados aparecerão aqui via JS -->
+                        <!-- Template invisível -->
+                        <div class="event-card previous-rating-card template" data-id="">
+                            <div class="card-name"></div>
+                            <div class="card-type"></div>
+                            <p class="card-description"></p>
+                            <p class="card-date-time"></p>
+
+                            <!-- Estrelas para avaliação -->
+                            <div class="rating-stars">
+                                <i class="fas fa-star" data-value="1"></i>
+                                <i class="fas fa-star" data-value="2"></i>
+                                <i class="fas fa-star" data-value="3"></i>
+                                <i class="fas fa-star" data-value="4"></i>
+                                <i class="fas fa-star" data-value="5"></i>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </div>
-    </footer>
+        </main>
+
+        <footer class="dashboard-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
+                    <div class="footer-links">
+                        <a href="/termos-de-uso" class="footer-link">Termos de Uso</a>
+                        <a href="/termos-de-privacidade" class="footer-link">Política de Privacidade</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
 
     <script src="js/estudante.js"></script>
 </body>

@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/img/favicon.png">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/dashboard.css">
-    <link rel="stylesheet" href="/css/coordenador.css">
+    <link rel="stylesheet" href="/css/instituicao.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -19,36 +19,32 @@
             <div class="container">
                 <div class="header-content">
                     <div class="logo">
-                        <a href="/coordenador" class="logo-link">
+                        <a href="/instituicao" class="logo-link">
                             <img src="/img/logo.png" alt="Logo INTEGRA" class="logo-image">
                         </a>
                     </div>
 
-                    <!-- Botão de menu hamburguer -->
                     <button class="hamburger" id="hamburger">
                         <span></span>
                         <span></span>
                         <span></span>
                     </button>
 
-                    <!-- Menu de navegação principal -->
                     <nav class="main-nav" id="mainNav">
-                        <a href="/home-coordenador" class="nav-link">Home</a>
-                        <a href="/agendamento-coordenador" class="nav-link">Agendamento</a>
-                        <a href="/agendados-coordenador" class="nav-link">Agendados</a>
-                        <a href="/estudantes-coordenador" class="nav-link">Estudantes</a>
+                        <a href="/instituicao" class="nav-link">Home</a>
+                        <a href="/gerenciamento" class="nav-link">Gerenciamento</a>
+                        <a href="/eventos" class="nav-link">Eventos</a>
 
-                        <!-- User Profile -->
                         <div class="user-info" id="user-profile-btn">
                             <div class="user-avatar">
-                                <i class="fas fa-user"></i>
+                                <i class="fas fa-user-tie"></i>
                             </div>
-                            <p>Prof. João</p>
+                            <p>Etec Maria Cristina Medeiros</p>
                             <i class="fas fa-chevron-down"></i>
                         </div>
 
                         <div class="mobile-buttons">
-                            <a href="/coordenador" class="button primary-button">Sair</a>
+                            <a href="/login/login.html" class="button primary-button">Sair</a>
                         </div>
                     </nav>
                 </div>
@@ -57,7 +53,7 @@
 
         <main class="dashboard-main">
             <!-- SEÇÃO DE BOAS-VINDAS -->
-            <div class="section">
+            <div class="section primeiro">
                 <div class="container">
                     <div class="welcome-section">
                         <h1 class="welcome-title">Eventos da Instituição</h1>
@@ -69,7 +65,7 @@
             </div>
 
             <!-- CALENDÁRIO E EVENTOS -->
-            <div class="section_depois calendario">
+            <div class="section calendario">
                 <div class="container">
                     <div class="card-container">
                         <!-- Calendário -->

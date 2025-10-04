@@ -1,3 +1,10 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+}
+
 /* Calendar */
 .calendar-container {
   display: grid;
@@ -109,6 +116,7 @@ h4{
   font-weight: 500;
   color: var(--primary-color);
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .events-container {
@@ -241,4 +249,12 @@ h4{
   .calendar-container {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.card-title{
+  text-align: center;
+}
+
+.card-description{
+  text-align: center;
 }
