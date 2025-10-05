@@ -102,9 +102,24 @@
                     <div class="filters-section">
                         <div class="filters-header">
                             <!-- Updated filter title -->
-                            <h2 class="section-title">Filtrar Eventos</h2>
+                            <h2 class="section-title">Seus Eventos</h2>
                         </div>
                         <div class="filters-grid">
+                            <div class="filter-group">
+                                <label for="searchFilter">Buscar</label>
+                                <!-- Updated placeholder text -->
+                                <input type="text" id="searchFilter" class="filter-input"
+                                    placeholder="Título da visita...">
+                            </div>
+                            <div class="filter-group">
+                                <!-- Changed from job level to visit type -->
+                                <label for="typeFilter">Tipo de Evento</label>
+                                <select id="typeFilter" class="filter-select">
+                                    <option value="all">Todos</option>
+                                    <option value="tecnica">Visita Técnica</option>
+                                    <option value="palestra">Palestra</option>
+                                </select>
+                            </div>
                             <div class="filter-group">
                                 <label for="statusFilter">Status</label>
                                 <select id="statusFilter" class="filter-select">
@@ -115,42 +130,9 @@
                                     <option value="Cancelada">Cancelada</option>
                                 </select>
                             </div>
-                            <div class="filter-group">
-                                <!-- Changed from job level to visit type -->
-                                <label for="typeFilter">Tipo de Evento</label>
-                                <select id="typeFilter" class="filter-select">
-                                    <option value="all">Todos</option>
-                                    <option value="tecnica">Técnica</option>
-                                    <option value="palestra">Palestra</option>
-                                </select>
-                            </div>
-                            <div class="filter-group">
-                                <label for="searchFilter">Buscar</label>
-                                <!-- Updated placeholder text -->
-                                <input type="text" id="searchFilter" class="filter-input"
-                                    placeholder="Título da visita...">
-                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="section_depois">
-                <div class="container">
                     <div class="jobs-section">
-                        <div class="section-header">
-                            <!-- Updated section title -->
-                            <h2 class="section-title">Seus Eventos Publicados</h2>
-                            <div class="view-toggle">
-                                <button class="view-btn active" data-view="grid">
-                                    <i class="fas fa-th-large"></i>
-                                </button>
-                                <button class="view-btn" data-view="list">
-                                    <i class="fas fa-list"></i>
-                                </button>
-                            </div>
-                        </div>
-
                         <div class="jobs-grid" id="visitsGrid">
                             <!-- Visits will be populated by JavaScript -->
                         </div>

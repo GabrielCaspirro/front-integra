@@ -423,6 +423,7 @@
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -815,4 +816,31 @@
   .view-toggle {
     justify-content: center;
   }
+}
+
+.horario-card {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 4px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 130px;
+  height: 40px;
+}
+
+.horario {
+  display: block;
+  font-weight: bold;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.job-footer span {
+  display: block;
+  margin-bottom: 2px;
 }

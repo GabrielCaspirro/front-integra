@@ -37,6 +37,9 @@ async function carregarEventos(id_empresa) {
 
     eventosOriginais = await resposta.json();
 
+    // Ordenar eventos pela data de forma crescente
+    eventosOriginais.sort((a, b) => new Date(a.data) - new Date(b.data));
+
     // Atualizar estatísticas
     document.getElementById("totalVisits").textContent = eventosOriginais.length;
     document.getElementById("scheduledVisits").textContent =
@@ -96,6 +99,24 @@ function renderizarEventos(eventos) {
   empty.style.display = "none";
 
   eventos.forEach(evento => {
+    const dataFormatada = formatarData(evento.data);
+
+    // Gerar os cards de horário
+    let horariosDisponiveis = "";
+    if (Array.isArray(evento.opcoes_horarios)) {
+      horariosDisponiveis = evento.opcoes_horarios
+        .map(horario => {
+          return `
+            <div class="horario-card">
+              <span class="horario">${horario}</span>
+            </div>
+          `;
+        })
+        .join(""); // Junta os cards sem vírgulas
+    } else {
+      horariosDisponiveis = evento.opcoes_horarios || "Horário não definido";
+    }
+
     const card = `
       <div class="job-card">
         <div class="job-header">
@@ -104,12 +125,10 @@ function renderizarEventos(eventos) {
         </div>
         <p class="job-description">${evento.descricao || ""}</p>
         <div class="job-footer">
-          <span><i class="fas fa-calendar"></i> ${new Date(evento.data).toLocaleDateString()}</span>
-          <span><i class="fas fa-clock"></i> ${
-            Array.isArray(evento.opcoes_horarios)
-              ? evento.opcoes_horarios.join(", ")
-              : (evento.opcoes_horarios || "Horário não definido")
-          }</span>
+          <span><i class="fas fa-calendar" style="color: var(--primary-color); margin-right: 5px; margin-bottom:3px;"></i> <strong>Data:</strong> ${dataFormatada}</span>
+          <span><i class="fas fa-clock" style="color: var(--primary-color); margin-right: 5px;"></i> <strong>Horários Disponíveis:</strong> <br>
+            ${horariosDisponiveis}
+          </span>
         </div>
       </div>
     `;
@@ -117,4 +136,11 @@ function renderizarEventos(eventos) {
     grid.innerHTML += card;
     list.innerHTML += `<div class="job-list-item">${card}</div>`;
   });
+}
+
+function formatarData(data) {
+  const options = { day: '2-digit', month: 'long', year: 'numeric' };
+  const dataObj = new Date(data);
+
+  return dataObj.toLocaleDateString('pt-BR', options).replace(/^(\d{2}) de/, '$1 de');
 }

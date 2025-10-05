@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const removerBtn = document.createElement('button');
     removerBtn.type = 'button';
-    removerBtn.textContent = '❌';
+    removerBtn.textContent = 'x';
     removerBtn.style.marginLeft = '10px';
     removerBtn.addEventListener('click', () => {
       const index = horarios.indexOf(valor);

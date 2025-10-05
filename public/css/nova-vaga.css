@@ -166,12 +166,12 @@
   flex-shrink: 0;
 }
 
-.checkbox-item input[type="checkbox"]:checked + .checkmark {
+.checkbox-item input[type="checkbox"]:checked+.checkmark {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
 }
 
-.checkbox-item input[type="checkbox"]:checked + .checkmark::after {
+.checkbox-item input[type="checkbox"]:checked+.checkmark::after {
   content: "\f00c";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
@@ -448,6 +448,58 @@
   font-size: 0.875rem;
   color: var(--text-dark);
   text-align: center;
+}
+
+#lista-horarios {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#lista-horarios li {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 4px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--primary-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 130px;
+  height: 40px;
+}
+
+#lista-horarios li:hover {
+  background: #e0e0e0;
+}
+
+#lista-horarios li button {
+  background: transparent;
+  border: none;
+  color: var(--primary-color);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 1px 2px;
+  margin-left: 10px;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+#lista-horarios li button:hover {
+  transform: scale(1.2);
+}
+
+.form-group {
+  padding-top: 7px;
+  padding-bottom: 10px;
+}
+
+.section-icon {
+  font-size: 25px;
 }
 
 /* Responsive Design */
