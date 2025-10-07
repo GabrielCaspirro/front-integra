@@ -2698,3 +2698,92 @@ header:hover {
   background: #4f46e5;
   border-radius: 4px;
 }
+
+/* Cards de evento do coordenador */
+.coord-event-card {
+  margin-top: 16px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: transform 0.2s ease;
+  color: #7e3f96,
+}
+
+.coord-event-card:hover {
+  transform: translateY(-3px);
+}
+
+.coord-event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.coord-event-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.coord-event-type {
+  font-size: 0.9rem;
+  color: #7e3f96;
+  font-style: italic;
+}
+
+.coord-event-info {
+  
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.coord-label {
+  font-weight: bold;
+}
+
+.coord-event-description {
+  margin: 10px 0;
+  color: #333;
+}
+
+.coord-edit-btn {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #7e3f96;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.coord-edit-btn:hover {
+  background-color: #4f46e5;
+}
+
+/* Calendário do coordenador */
+.coord-calendar-day {
+  margin: 3px;
+  width: 40%;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: #7e3f96;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.coord-calendar-day:hover {
+  background-color: #817cfa;
+}
+
+/* Mensagem de nenhum evento */
+.coord-no-events {
+  font-style: italic;
+  color: #666;
+  padding: 10px;
+}

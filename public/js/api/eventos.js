@@ -6,6 +6,12 @@ export async function getEventos() {
   return response.json();
 }
 
+export async function getEventosLivres() {
+  const response = await fetch(`${BASE_URL}/eventos?confirmado=false&status=pendente`);
+  if (!response.ok) throw new Error("Erro ao buscar eventos");
+  return response.json();
+}
+
 export async function criarEvento(payload) {
   const res = await fetch(`${BASE_URL}/inserir-evento`, {
     method: 'POST',

@@ -71,7 +71,7 @@
                                 <i class="fas fa-calendar"></i>
                             </div>
                             <div class="stat-content">
-                                <h3>5</h3>
+                                <h3 id="event-count">5</h3>
                                 <p>Eventos Agendados</p>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                                 <i class="fas fa-users"></i>
                             </div>
                             <div class="stat-content">
-                                <h3>156</h3>
+                                <h3 id="student-count">156</h3>
                                 <p>Estudantes</p>
                             </div>
                         </div>
@@ -119,58 +119,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="section_depois">
-                <div class="container">
-                    <div class="calendar-card">
-                        <div class="card-content">
-                            <h2 class="section-title">Calendário de Eventos</h2>
-                            <div class="calendar-container">
-                                <div class="calendar" id="calendar">
-                                    <!-- Calendar gerado via JavaScript -->
-                                </div>
-                                <div class="selected-day-events">
-                                    <h3 class="selected-date" id="selected-date">Selecione uma data</h3>
-                                    <div id="events-container" class="events-container">
-                                        <div class="event-item" style="display: none;">
-                                            <div class="event-time event-bar">
-                                                <div class="event-info">Hora:</div>
-                                                <span class="time event-preenchido"></span>
-                                                <div class="event-info">Até:</div>
-                                                <span class="time_end event-preenchido-calendario"></span>
-                                                <div class="event-info">Tipo:</div>
-                                                <span class="tipo event-preenchido-tipo"></span>
-                                            </div>
-                                            <div class="pula-linha"></div>
-                                            <div class="event-nome event-bar-calendario">
-                                                <div class="event-info">Título:</div>
-                                                <span class="nome event-preenchido-calendario-title"></span>
-                                            </div>
-                                            <div class="pula-linha"></div>
-                                            <div class="event-info event-bar-descricao">Descrição</div>
-                                            <div class="event-descricao"><span
-                                                    class="descricao event-preenchido-descricao"></span>
-                                            </div>
-                                            <div class="pula-linha"></div>
-                                            <div class="event-info event-bar-salas">Salas</div>
-                                            <div class="event-salas">
-                                                <span class="salas event-preenchido-salas"></span>
-                                            </div>
-                                            <div class="pula-linha-botao"></div>
-                                            <div class="card-footer">
-                                                <a href="agendados.html" class="button primary-button full-width">Ver
-                                                    Mais
-                                                    Informações
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </main>
 
         <!-- Footer -->
@@ -188,6 +136,7 @@
     </div>
 
     <script src="/js/coordenador.js"></script>
+    <script type="module" src="/js/home-coordenador.js"></script>
 </body>
 
 </html>
