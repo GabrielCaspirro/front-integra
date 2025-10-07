@@ -82,6 +82,18 @@ router.get('/palestrante', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/palestrante/palestrante_view.html'));
 });
 
+router.get('/palestrante/palestras', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/palestrante/palestras.html'));
+});
+
+router.get('/palestrante/empresas', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/palestrante/empresas.html'));
+});
+
+router.get('/palestrante/inscricoes', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/palestrante/inscricoes.html'));
+});
+
 //Cadastro
 router.get('/cadastro', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/cadastro/cadastro.html'));
@@ -140,7 +152,6 @@ router.get('/calendario', (req, res) => {
 router.get('/avaliar', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/estudante/avaliar.html'));
 });
-
 
 
 module.exports = router;
