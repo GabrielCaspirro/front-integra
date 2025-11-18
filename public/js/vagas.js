@@ -1,5 +1,5 @@
 import { buscarPerfil } from "./api/index.js";
-import { BASE_URL } from "./api/config.js";
+import { BASE_URL, BASE_URL_IMG } from "./api/config.js";
 
 let eventosOriginais = []; // cache para não precisar refazer fetch toda hora
 let perfilGlobal = null;
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Atualizar avatar (se tiver imagem)
     const avatar = document.querySelector("#user-profile-btn .user-avatar");
     if (perfilGlobal.logo) {
-      avatar.innerHTML = `<img src="${perfilGlobal.logo}" alt="Foto de perfil" class="avatar-img">`;
+      avatar.innerHTML = `<img src="${BASE_URL_IMG}${perfilGlobal.logo}" alt="Foto de perfil" class="avatar-img" style="width:40px;height:40px;border-radius:50%;">`;
     }
   }
 

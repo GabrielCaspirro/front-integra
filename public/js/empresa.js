@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const userAvatar = document.querySelector(".user-avatar i");
       if (userAvatar && usuario.logo) {
         userAvatar.outerHTML = `
-          <img src="${BASE_URL_IMG}${usuario.logo}" alt="Avatar" class="avatar-img">
+          <img src="${BASE_URL_IMG}${usuario.logo}" alt="Avatar" class="avatar-img" style="width:40px;height:40px;border-radius:50%;">
         `;
       }
 

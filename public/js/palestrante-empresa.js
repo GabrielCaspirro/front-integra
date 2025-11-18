@@ -1,4 +1,5 @@
 import { buscarPerfil, buscarSolicitacoes, responderSolicitacao } from "../js/api/index.js";
+import { BASE_URL_IMG } from "./api/config.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const pendingContainer = document.getElementById("pendingSpeakers");
@@ -22,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // Atualizar avatar (se tiver imagem)
         const avatar = document.querySelector("#user-profile-btn .user-avatar");
         if (perfil.logo) {
-        avatar.innerHTML = `<img src="${perfil.logo}" alt="Foto de perfil" class="avatar-img">`;
+        avatar.innerHTML = `<img src="${BASE_URL_IMG}${perfil.logo}" alt="Foto de perfil" class="avatar-img" style="width:40px;height:40px;border-radius:50%;">`;
         }
     }
 
