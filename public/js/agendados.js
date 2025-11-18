@@ -2,17 +2,18 @@ import { buscarPerfil, getEventos, getEventosEmpresa } from './api/index.js';
 import { BASE_URL, BASE_URL_IMG } from './api/config.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
-  // --- Busca perfil da empresa e atualiza navbar ---
-  const profileData = await buscarPerfil();
-  if (profileData) {
-    // Atualizar nome
-    document.querySelector("#user-profile-btn p").textContent =
-      profileData.nome_empresa || profileData.nome;
+  try {
+    const profileData = await buscarPerfil();
+    if (profileData) {
+      // Atualizar nome
+      document.querySelector("#user-profile-btn p").textContent =
+        profileData.nome_empresa || profileData.nome;
 
-    // Atualizar avatar (se tiver imagem)
-    const avatar = document.querySelector("#user-profile-btn .user-avatar");
-    if (profileData.logo) {
-      avatar.innerHTML = `<img src="${BASE_URL_IMG}${profileData.logo}" alt="Foto de perfil" class="avatar-img" style="width:40px;height:40px;border-radius:50%;">`;
+      // Atualizar avatar (se tiver imagem)
+      const avatar = document.querySelector("#user-profile-btn .user-avatar");
+      if (profileData.logo) {
+        avatar.innerHTML = `<img src="${BASE_URL_IMG}${profileData.logo}" alt="Foto de perfil" class="avatar-img" style="width:40px;height:40px;border-radius:50%;">`;
+      }
     }
   } catch (err) {
     console.error('Erro ao buscar perfil:', err);
