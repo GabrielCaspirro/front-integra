@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palestras - INTEGRA</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/palestrante.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="/img/favicon.png" type="image/png">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="/" class="logo-link">
+                            <img src="../img/logo.png" alt="INTEGRA" class="logo-img">
+                        </a>
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-info">
+                            <div class="avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <span class="user-name">Ana Silva</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="back-nav">
+                        <a href="/palestrante" class="back-link">
+                            <i class="fas fa-arrow-left"></i>
+                            Voltar ao Palestrante
+                        </a>
+                    </div>
+                    <h1 class="page-title">Palestras Disponíveis</h1>
+                    <p class="page-subtitle">Encontre oportunidades para compartilhar seu conhecimento</p>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-section">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" id="searchInput" placeholder="Buscar palestras por título, empresa ou descrição...">
+                        <button class="search-btn" id="searchBtn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Palestras Grid -->
+                <div class="content-grid" id="palestrasGrid">
+                    <!-- Palestras serão carregadas via JavaScript -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal de Inscrição -->
+        <div class="modal" id="inscricaoModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Inscrever-se na Palestra</h3>
+                    <button class="modal-close" id="closeModal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="palestra-info" id="modalPalestraInfo">
+                        <!-- Informações da palestra serão preenchidas via JS -->
+                    </div>
+                    <div class="form-group">
+                        <label for="observacoes">Observações (opcional)</label>
+                        <textarea id="observacoes" placeholder="Alguma observação ou necessidade especial..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+                    <button class="btn btn-primary" id="confirmInscricao">Confirmar Inscrição</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <p class="copyright">© 2025 INTEGRA. Todos os direitos reservados.</p>
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">Termos</a>
+                        <a href="#" class="footer-link">Privacidade</a>
+                        <a href="#" class="footer-link">Suporte</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../js/palestrante.js"></script>
+</body>
+</html>

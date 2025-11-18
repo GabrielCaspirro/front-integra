@@ -1,5 +1,5 @@
-import { buscarPerfil, getEventos } from './api/index.js';
-import { BASE_URL } from './api/config.js';
+import { buscarPerfil, getEventos, getEventosEmpresa } from './api/index.js';
+import { BASE_URL, BASE_URL_IMG } from './api/config.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
   // --- Busca perfil da empresa e atualiza navbar ---
@@ -12,14 +12,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Atualizar avatar (se tiver imagem)
     const avatar = document.querySelector("#user-profile-btn .user-avatar");
     if (profileData.logo) {
-      avatar.innerHTML = `<img src="${profileData.logo}" alt="Foto de perfil" class="avatar-img">`;
+      avatar.innerHTML = `<img src="${BASE_URL_IMG}${profileData.logo}" alt="Foto de perfil" class="avatar-img" style="width:40px;height:40px;border-radius:50%;">`;
     }
   }
 
   // --- Busca eventos confirmados ---
   let events = [];
   try {
-    events = await getEventos(); // se quiser, pode passar query: ?confirmado=true
+    events = await getEventosEmpresa(profileData.id); // se quiser, pode passar query: ?confirmado=true
     events = events
       .filter(e => e.periodo_escolhido) // apenas confirmados
       .map(e => ({
