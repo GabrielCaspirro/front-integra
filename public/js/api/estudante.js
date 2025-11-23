@@ -49,3 +49,26 @@ export async function inserirAlunoAPI(aluno) {
     }
 }
 
+export async function carregarTurmas(perfil) {
+    try {
+        const response = await fetch(`${BASE_URL}/salas/${perfil.id}`);
+        if (!response.ok) throw new Error("Erro ao carregar turmas.");
+        const salas = await response.json();
+
+        turmas = await Promise.all(salas.map(async sala => {
+            const alunosRes = await fetch(`${BASE_URL}/alunos/${sala}`);
+            const alunos = alunosRes.ok ? await alunosRes.json() : [];
+            return {
+                id: Date.now() + Math.random(),
+                nome: sala,
+                curso: "",
+                modulo: "",
+                turno: "",
+                alunos
+            };
+        }));
+    } catch (err) {
+        console.error(err);
+    }
+}
+

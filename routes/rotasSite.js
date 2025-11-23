@@ -153,6 +153,10 @@ router.get('/avaliar', (req, res) => {
   res.sendFile(path.join(__dirname, '../views/estudante/avaliar.html'));
 });
 
+router.get('/perfil', (req, res) => {
+  res.sendFile(path.join(__dirname, '../views/perfil.html'));
+});
+
 
 
 module.exports = router;

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Perfil - INTEGRA</title>
+  <link rel="icon" href="img/favicon.png" type="image/png" sizes="32x32" />
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/empresa.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/perfil.css"> <!-- opcional -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="flex-col min-h-screen">
+    <!-- header (mesma estrutura da sua app) -->
+    <header class="sticky-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <a href="/empresa" class="logo-link">
+              <img src="img/logo.png" alt="Logo INTEGRA" class="logo-image">
+            </a>
+          </div>
+
+          <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+
+          <nav class="main-nav" id="mainNav">
+            <a href="/empresa" class="nav-link">Home</a>
+            <a href="/vagas" class="nav-link">Meus Eventos</a>
+            <a href="/agendados" class="nav-link">Agendados</a>
+            <a href="/palestrantes-empresa" class="nav-link">Meus Palestrantes</a>
+
+            <div class="user-info" id="user-profile-btn">
+              <div class="user-avatar"><i class="fas fa-user"></i></div>
+              <a href="/perfil"><p id="empresaNome"></p></a>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+
+            <div class="mobile-buttons">
+              <a href="/login" class="button primary-button">Sair</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- main -->
+    <main class="dashboard-main">
+      <div class="section">
+        <div class="container">
+          <div class="welcome-section">
+            <h1 class="welcome-title">Perfil da Empresa</h1>
+            <p class="welcome-description">Gerencie as informações da sua empresa</p>
+          </div>
+
+          <!-- perfil card -->
+          <div class="perfil-card" style="max-width:900px;margin:1.5rem auto;">
+            <div style="display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap;">
+              <div style="flex:0 0 160px; text-align:center;">
+                <div id="perfil-foto" style="width:150px;height:150px;border-radius:12px;overflow:hidden;background:#eee;display:flex;align-items:center;justify-content:center;font-size:48px;color:#777;">
+                  <i class="fas fa-building"></i>
+                </div>
+                <button id="editarFotoBtn" class="button" style="margin-top:0.75rem;">Alterar foto</button>
+              </div>
+
+              <div style="flex:1 1 400px;">
+                <h2 id="perfil-nome" style="margin:0 0 6px 0">Carregando...</h2>
+                <p id="perfil-email" style="margin:0;color:#666;">&nbsp;</p>
+
+                <div style="margin-top:1rem; display:grid; grid-template-columns:repeat(2,1fr); gap:10px;">
+                  <div>
+                    <div class="info-label">CNPJ</div>
+                    <div class="info-value" id="info-cnpj">—</div>
+                  </div>
+
+                  <div>
+                    <div class="info-label">Telefone</div>
+                    <div class="info-value" id="info-telefone">—</div>
+                  </div>
+
+                  <div>
+                    <div class="info-label">Área de Atuação</div>
+                    <div class="info-value" id="info-area">—</div>
+                  </div>
+
+                  <div style="grid-column:1 / -1;">
+                    <div class="info-label">Endereço</div>
+                    <div class="info-value" id="info-endereco">—</div>
+                  </div>
+                <div style="margin-top:1rem;display:flex;gap:0.75rem;">
+                  <button id="editar-perfil-btn" class="button primary-button">Editar Perfil</button>
+                  <button id="excluir-conta-btn" class="button danger-button">Excluir Conta</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <footer class="dashboard-footer">
+      <div class="container">
+        <div class="footer-content">
+          <p>© 2025 INTEGRA. Todos os direitos reservados.</p>
+          <div class="footer-links">
+            <a href="/termos-de-uso" class="footer-link">Termos de Uso</a>
+            <a href="/termos-de-privacidade" class="footer-link">Política de Privacidade</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="js/perfil.js"></script>
+</body>
+</html>
