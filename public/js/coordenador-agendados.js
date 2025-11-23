@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     datas.forEach(data => {
       const dateObj = new Date(data);
-      const dia = String(dateObj.getDate()).padStart(2, "0");
+      const dia = String(dateObj.getDate() + 1).padStart(2, "0");
       const mes = String(dateObj.getMonth() + 1).padStart(2, "0");
       const ano = dateObj.getFullYear();
       const displayStr = `${dia}/${mes}/${ano}`;

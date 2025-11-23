@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const elDesc = document.getElementById('visitDescription');
   const elArea = document.getElementById('visitArea');
   const elDate = document.getElementById('data');
+  const elMaxParticipantes = document.getElementById('max_participantes');
 
   elTitle?.addEventListener('input', () => previewTitle.textContent = elTitle.value || 'Título da Visita Técnica');
   elDesc?.addEventListener('input', () => previewDescription.textContent = elDesc.value || 'Descrição aparecerá aqui...');
@@ -97,6 +98,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       data: elDate.value,
       opcoes_horarios: horarios, // array por padrão
       valor: valorNum,
+      max_participantes: Number(elMaxParticipantes.value),
       tipo: elArea.value,
       cep: cepRaw,
       id_empresa: Number(id_empresa) || id_empresa

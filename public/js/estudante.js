@@ -1,4 +1,4 @@
-import { buscarPerfil, getEventos } from './api/index.js';
+import { buscarPerfil, getEventos, buscarEventosAluno } from './api/index.js';
 import { BASE_URL } from './api/config.js';
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --- Busca eventos confirmados ---
   let events = [];
   try {
-    events = await getEventos();
+    events = await buscarEventosAluno();
     events = events
       .filter(e => e.periodo_escolhido)
       .map(e => ({ ...e, date: new Date(e.data) }));

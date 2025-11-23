@@ -24,14 +24,55 @@ document.addEventListener("DOMContentLoaded", async () => {
   let selectedHour = null;
   let selectedRooms = [];
 
+  let turmasDetalhadas = [];
+
   const STORAGE_KEY = "agendamentos";
   const agendamentos = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-  // ------------------ FUNÇÃO PARA CARREGAR PERFIL ------------------
+
+  // ===========================================================
+  // ------------------ FUNÇÕES DE ABRIR/FECHAR MODAL ----------
+  // ===========================================================
+
+  function abrirAgendarModal() {
+    modal.style.display = "block";
+  }
+
+  function fecharAgendarModal() {
+    modal.style.display = "none";
+  }
+
+  function abrirResumoModal() {
+    resumoModal.style.display = "block";
+  }
+
+  function fecharResumoModal() {
+    resumoModal.style.display = "none";
+  }
+
+  // --- Fechar clicando no X ---
+  closeModal.addEventListener("click", fecharAgendarModal);
+  closeResumo.addEventListener("click", fecharResumoModal);
+
+  // --- Fechar clicando fora do modal ---
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) fecharAgendarModal();
+    if (event.target === resumoModal) fecharResumoModal();
+  });
+
+  // --- Fechar ao concluir ---
+  function concluirAgendamento() {
+    fecharAgendarModal();
+  }
+
+
+  // ===========================================================
+  // ------------------ FUNÇÃO PARA CARREGAR PERFIL ------------
+  // ===========================================================
+
   async function carregarPerfil() {
     try {
       const perfil = await buscarPerfil();
-      console.log(perfil)
       if (perfil) {
         document.querySelector(".user-info p").textContent = perfil.nome;
       }
@@ -40,41 +81,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // ------------------ FUNÇÃO PARA CARREGAR EVENTOS ------------------
+
+  // ===========================================================
+  // ------------------ FUNÇÃO PARA CARREGAR EVENTOS -----------
+  // ===========================================================
+
   async function carregarEventos() {
     try {
       const eventos = await getEventosLivres();
       eventsContainer.innerHTML = "";
 
       for (const evento of eventos) {
-        // Buscar endereço
+
         let enderecoText = "";
         if (evento.id_endereco) {
           try {
             const res = await fetch(`${BASE_URL}/endereco`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ id: evento.id_endereco }),
+              body: JSON.stringify({ id: evento.id_endereco })
             });
+
             if (res.ok) {
               const dadosEndereco = await res.json();
-              if (dadosEndereco.length > 0) {
-                const e = dadosEndereco[0];
-                enderecoText = {
-                  rua: e.rua || "",
-                  bairro: e.bairro || "",
-                  numero: e.numero || "",
-                  cidade: e.cidade || "",
-                  cep: e.cep || ""
-                };
-              }
+              if (dadosEndereco.length > 0) enderecoText = dadosEndereco[0];
             }
           } catch (err) {
             console.error("Erro ao buscar endereço:", err);
           }
         }
 
-        // Buscar nome da empresa
+
         let empresaNome = "Não informado";
         if (evento.id_empresa) {
           try {
@@ -88,16 +125,15 @@ document.addEventListener("DOMContentLoaded", async () => {
           }
         }
 
-        let tipo;
-        (evento.tipo == "visita_tecnica") ? tipo = "Visita Técnica" : tipo = "Palestra";
+        let tipo = (evento.tipo == "visita_tecnica") ? "Visita Técnica" : "Palestra";
 
-        // Clonar template e popular dados
         const card = templateCard.cloneNode(true);
         card.style.display = "block";
-        card.querySelector(".agendar-event-title").textContent = evento.nome || "Evento";
-        card.querySelector(".agendar-event-description").textContent = evento.descricao || "";
+
+        card.querySelector(".agendar-event-title").textContent = evento.nome;
+        card.querySelector(".agendar-event-description").textContent = evento.descricao;
         card.querySelector(".empresa-value").textContent = empresaNome;
-        card.querySelector(".tipo-value").textContent = tipo || "";
+        card.querySelector(".tipo-value").textContent = tipo;
 
         if (enderecoText) {
           card.querySelector(".rua-value").textContent = enderecoText.rua;
@@ -114,8 +150,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         card.querySelector(".agendar-event-btn").addEventListener("click", () => {
           selectedEvent = evento;
-          modalTitle.textContent = `Agendar ${evento.tipo}`;
-          modal.style.display = "block";
+          modalTitle.textContent = `Agendar ${tipo}`;
+          abrirAgendarModal();  // <--- AGORA ABRE CORRETAMENTE
           resetModal();
           showCalendar();
         });
@@ -127,7 +163,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 
-  // ------------------ FUNÇÕES DO MODAL ------------------
+
+  // ===========================================================
+  // ------------------ FUNÇÕES DO MODAL ------------------------
+  // ===========================================================
+
   function resetModal() {
     selectedDay = null;
     selectedHour = null;
@@ -142,21 +182,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function showCalendar() {
-    stepDays.style.display = "block";
     availableDaysContainer.innerHTML = "";
 
-    const header = document.createElement("div");
-    header.classList.add("calendar-header");
-    header.textContent = "Escolha um dia disponível";
-    availableDaysContainer.appendChild(header);
-
-    const body = document.createElement("div");
-    body.classList.add("calendar-body");
-    body.style.display = "flex";
-    body.style.gap = "0.5rem";
-
-    const rawDate = selectedEvent.data;
-    const dateObj = new Date(rawDate);
+    const dateObj = new Date(selectedEvent.data);
 
     const day = String(dateObj.getDate()).padStart(2, "0");
     const month = String(dateObj.getMonth() + 1).padStart(2, "0");
@@ -176,8 +204,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       showHours();
     });
 
-    body.appendChild(dayDiv);
-    availableDaysContainer.appendChild(body);
+    availableDaysContainer.appendChild(dayDiv);
   }
 
   function showHours() {
@@ -197,138 +224,145 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+
+  // ===========================================================
+  // ------------------ CARREGAR TURMAS -------------------------
+  // ===========================================================
+
   async function showRooms() {
     availableRoomsContainer.innerHTML = "";
-    let turmas = [];
+    turmasDetalhadas = [];
+    selectedRooms = [];
 
     try {
-        const token = localStorage.getItem("token");
-        const resPerfil = await fetch(`${BASE_URL}/perfil`, {
-            headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
-        });
-        let perfil = null;
-        if (resPerfil.ok) perfil = await resPerfil.json();
+      const token = localStorage.getItem("token");
 
-        if (perfil && perfil.id) {
-            const resTurmas = await fetch(`${BASE_URL}/turmasByInstituicao/${perfil.id}`, {
-                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` }
-            });
-            if (resTurmas.ok) turmas = await resTurmas.json();
-        }
+      const resPerfil = await fetch(`${BASE_URL}/perfil`, {
+        headers: { "Authorization": `Bearer ${token}` }
+      });
+      const perfil = await resPerfil.json();
+
+      const resSalas = await fetch(`${BASE_URL}/turmasByInstituicao/${perfil.id}`, {
+        headers: { "Authorization": `Bearer ${token}` }
+      });
+
+      const salas = resSalas.ok ? await resSalas.json() : [];
+
+      turmasDetalhadas = await Promise.all(
+        salas.map(async (sala) => {
+          const resAlunos = await fetch(`${BASE_URL}/alunos/${sala}`);
+          const alunos = resAlunos.ok ? await resAlunos.json() : [];
+
+          return {
+            nome: sala,
+            alunos
+          };
+        })
+      );
+
     } catch (err) {
-        console.error("Erro ao buscar turmas:", err);
+      console.error("Erro ao buscar turmas:", err);
     }
 
-    const selectedRoomsSet = new Set(selectedRooms);
+    turmasDetalhadas.forEach(turma => {
+      const btn = document.createElement("button");
+      btn.textContent = turma.nome;
+      btn.classList.add("room-btn");
 
-    turmas.forEach(room => {
-        const btn = document.createElement("button");
-        btn.textContent = room;
-        btn.classList.add("room-btn");
-        if (selectedRoomsSet.has(room)) btn.classList.add("selected");
-        btn.addEventListener("click", () => {
-            if (selectedRoomsSet.has(room)) selectedRoomsSet.delete(room);
-            else selectedRoomsSet.add(room);
-            btn.classList.toggle("selected");
-            confirmarTurmasBtn.style.display = selectedRoomsSet.size > 0 ? "block" : "none";
-            selectedRooms = Array.from(selectedRoomsSet); // mantém a lista atualizada
-        });
-        availableRoomsContainer.appendChild(btn);
+      btn.addEventListener("click", () => {
+        if (selectedRooms.includes(turma.nome)) {
+          selectedRooms = selectedRooms.filter(t => t !== turma.nome);
+          btn.classList.remove("selected");
+        } else {
+          selectedRooms.push(turma.nome);
+          btn.classList.add("selected");
+        }
+
+        confirmarTurmasBtn.style.display = selectedRooms.length > 0 ? "block" : "none";
+      });
+
+      availableRoomsContainer.appendChild(btn);
     });
 
-    confirmarTurmasBtn.style.display = selectedRooms.length > 0 ? "block" : "none";
   }
 
 
-  function openResumoModal() {
-    if (!selectedEvent || !selectedDay || !selectedHour || selectedRooms.length === 0) return;
-    const [ano, mes, dia] = selectedDay.split("-");
-    document.getElementById("resumo-titulo").textContent = selectedEvent.nome;
-    document.getElementById("resumo-data").textContent = `${dia}/${mes}/${ano}`;
-    document.getElementById("resumo-hora").textContent = selectedHour;
-    document.getElementById("resumo-turmas").textContent = selectedRooms.join(", ");
-    resumoModal.style.display = "block";
-  }
+  // ===========================================================
+  // ------------------ CONFIRMAR EVENTO ------------------------
+  // ===========================================================
 
-  closeModal.addEventListener("click", () => { modal.style.display = "none"; resetModal(); });
-  closeResumo.addEventListener("click", () => { resumoModal.style.display = "none"; });
-  window.addEventListener("click", e => {
-    if (e.target === modal) { modal.style.display = "none"; resetModal(); }
-    if (e.target === resumoModal) { resumoModal.style.display = "none"; }
-  });
-
-  // ------------------ CONFIRMAR EVENTO ------------------
   async function confirmarEvento(selectedEvent) {
     try {
-        const resPerfil = await fetch(`${BASE_URL}/perfil`, {
-            headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
-        });
-        if (!resPerfil.ok) throw new Error("Erro ao buscar perfil do coordenador");
-        const perfil = await resPerfil.json();
+      const resPerfil = await fetch(`${BASE_URL}/perfil`, {
+        headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+      });
+      const perfil = await resPerfil.json();
 
-        // Usar selectedRooms diretamente
-        if (!selectedRooms || selectedRooms.length === 0) {
-            alert("Selecione ao menos uma turma");
-            return;
-        }
+      if (!selectedRooms.length) {
+        alert("Selecione ao menos uma turma");
+        return;
+      }
 
-        if (!selectedHour) {
-            alert("Selecione um horário");
-            return;
-        }
+      if (!selectedHour) {
+        alert("Selecione um horário");
+        return;
+      }
 
-        const observacao = document.getElementById("observacao")?.value || null;
+      let totalAlunos = 0;
 
-        const body = {
-            id_evento: selectedEvent.id,
-            id_coordenador: perfil.id,
-            status: "aceito",
-            horario: selectedHour,
-            observacao: observacao,
-            turmas: selectedRooms.join(",")
-        };
+      for (const nomeTurma of selectedRooms) {
+        const turmaObj = turmasDetalhadas.find(t => t.nome === nomeTurma);
+        if (turmaObj) totalAlunos += turmaObj.alunos.length;
+      }
 
-        const res = await fetch(`${BASE_URL}/evento-relacao`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("token")}`
-            },
-            body: JSON.stringify(body)
-        });
+      const limite = selectedEvent.max_participantes;
 
-        if (!res.ok) {
-            const erro = await res.json();
-            throw new Error(erro.erro || "Erro ao vincular evento");
-        }
+      if (totalAlunos > limite) {
+        alert(`⚠ LIMITE EXCEDIDO!\nMáximo: ${limite}\nTotal: ${totalAlunos}`);
+        return;
+      }
 
-        const data = await res.json();
-        alert("Evento confirmado com sucesso!");
-        console.log(data);
+      const body = {
+        id_evento: selectedEvent.id,
+        id_coordenador: perfil.id,
+        status: "aceito",
+        horario: selectedHour,
+        observacao: document.getElementById("observacao")?.value || null,
+        turmas: selectedRooms.join(",")
+      };
 
-        stepRooms.style.display = "none";
+      const res = await fetch(`${BASE_URL}/evento-relacao`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        },
+        body: JSON.stringify(body)
+      });
+
+      if (!res.ok) {
+        const erro = await res.json();
+        throw new Error(erro.erro || "Erro ao vincular evento");
+      }
+
+      // FECHA O MODAL E ABRE O RESUMO
+      concluirAgendamento();
+
     } catch (err) {
-        console.error("Erro ao confirmar evento:", err);
-        alert("Erro ao confirmar evento: " + err.message);
+      console.error("Erro ao confirmar evento:", err);
+      alert("Erro: " + err.message);
     }
-}
+  }
 
-
-  // ------------------ LISTENER BOTÃO CONFIRMAR ------------------
   confirmarTurmasBtn.addEventListener("click", () => {
-        if (!selectedEvent) {
-            alert("Nenhum evento selecionado");
-            return;
-        }
-        if (selectedRooms.length === 0) {
-            alert("Selecione pelo menos uma turma!");
-            return;
-        }
-        confirmarEvento(selectedEvent); // usa a variável já atualizada
-    });
+    confirmarEvento(selectedEvent);
+  });
 
 
-  // ---------- INICIAR ----------
+  // ===========================================================
+  // ------------------------ INICIAR ---------------------------
+  // ===========================================================
+
   await carregarPerfil();
   await carregarEventos();
 });
